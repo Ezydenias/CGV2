@@ -998,6 +998,73 @@ public class TestsLineareAlgebra {
 
 //EuklDistance Test
 
+    @Test
+    public void euklDistanceFunction2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(4,6);
+        Vektor2D c = new Vektor2D(2,2);
+        Vektor2D d = new Vektor2D(4,6);
+        double test = 4.472;
+        double e,f;
+        e=LineareAlgebra.euklDistance(a,b);
+        f=LineareAlgebra.euklDistance(d,c);
+
+        assertEquals(e,f,0.0);
+        assertEquals(test,e,0.1);
+    }
+
+    @Test
+    public void euklDistanceFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(4,6,8);
+        Vektor3D c = new Vektor3D(2,2,2);
+        Vektor3D d = new Vektor3D(4,6,8);
+        double test = 7.483;
+        double e,f;
+        e=LineareAlgebra.euklDistance(a,b);
+        f=LineareAlgebra.euklDistance(d,c);
+
+        assertEquals(e,f,0.0);
+        assertEquals(test,e,0.1);
+    }
+
+    @Test
+    public void euklDistanceFunctionZero2D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        double e;
+
+        e=LineareAlgebra.euklDistance(a,a);
+
+        assertEquals(0.0,e,0.0);
+    }
+    @Test
+    public void euklDistanceFunctionZero3D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D c = new Vektor2D(2,2);
+        double e;
+
+        e=LineareAlgebra.euklDistance(a,a);
+
+        assertEquals(0.0,e,0.0);
+    }
+
+    @Test
+    public void euklDistanceConsistency(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D atest = new Vektor2D(2,2);
+        Vektor3D b = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,2);
+
+        LineareAlgebra.euklDistance(a,a);
+        LineareAlgebra.euklDistance(b,b);
+
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
 //ManhattenDistance Test
 
 //CrossProduct Test

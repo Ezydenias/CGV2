@@ -169,4 +169,28 @@ public class LineareAlgebra {
         return (temp);
     }
 
+    public static double euklDistance(Vektor3D a, Vektor3D b) {
+        double result, c, d, f;
+        c = a.x - b.x;
+        d = a.y - b.y;
+        f = a.z - b.z;
+        c *= c;
+        d *= d;
+        f *= f;
+        result = c + d + f;
+        result = Math.sqrt(result);
+        return result;
+    }
+
+    public static double euklDistance(Vektor2D a, Vektor2D b) {
+        double result, c, d;
+        c = a.x - b.x;
+        d = a.y - b.y;
+        c *= c;
+        d *= d;
+        result = c + d;
+        result = Math.sqrt(result);
+        return result;
+    }
+
 }
