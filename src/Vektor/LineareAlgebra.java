@@ -193,4 +193,54 @@ public class LineareAlgebra {
         return result;
     }
 
+    public static double manhattenDistance(Vektor3D a, Vektor3D b) {
+        double result, m, j, k;
+        m = a.x - b.x;
+        j = a.y - b.y;
+        k = a.z - b.z;
+        m = Math.abs(m);
+        j = Math.abs(j);
+        k = Math.abs(k);
+//        m*=m;
+//        j*=j;
+//        k*=k;
+//        m=Math.sqrt(m);
+//        j=Math.sqrt(j);
+//        k=Math.sqrt(k);
+        result = m + j + k;
+        return result;
+    }
+
+    public static double manhattenDistance(Vektor2D a, Vektor2D b) {
+        double result, m, j;
+        m = a.x - b.x;
+        j = a.y - b.y;
+        m = Math.abs(m);
+        j = Math.abs(j);
+//        m*=m;
+//        j*=j;
+//        m=Math.sqrt(m);
+//        j=Math.sqrt(j);
+        result = m + j;
+
+        return result;
+    }
+
+    public static Vektor3D crossProduct(Vektor3D a, Vektor3D b) {
+        Vektor3D temp = new Vektor3D();
+        temp.x = a.y * b.z - a.z * b.y;
+        temp.y = a.z * b.x - a.x * b.z;
+        temp.z = a.x * b.y - a.y * b.x;
+        return temp;
+    }
+
+    public static double dotProduct(Vektor3D a, Vektor3D b) {
+        double temp = a.x * b.x + a.y * b.y + a.z * b.z;
+        return temp;
+    }
+
+    public static double dotProduct(Vektor2D a, Vektor2D b) {
+        double temp = a.x * b.x + a.y * b.y;
+        return temp;
+    }
 }

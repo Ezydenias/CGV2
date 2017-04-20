@@ -1037,6 +1037,7 @@ public class TestsLineareAlgebra {
 
         assertEquals(0.0,e,0.0);
     }
+
     @Test
     public void euklDistanceFunctionZero3D(){
         Vektor2D a = new Vektor2D(2,2);
@@ -1067,9 +1068,171 @@ public class TestsLineareAlgebra {
 
 //ManhattenDistance Test
 
+    @Test
+    public void manhattenDistanceFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(4,6,8);
+        Vektor3D c = new Vektor3D(2,2,2);
+        Vektor3D d = new Vektor3D(4,6,8);
+        double test = 12.0;
+        double e,f;
+        e=LineareAlgebra.manhattenDistance(a,b);
+        f=LineareAlgebra.manhattenDistance(d,c);
+
+        assertEquals(e,f,0.0);
+        assertEquals(test,e,0.1);
+    }
+
+    @Test
+    public void manhattenDistanceFunction2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(4,6);
+        Vektor2D c = new Vektor2D(2,2);
+        Vektor2D d = new Vektor2D(4,6);
+        double test = 6.0;
+        double e,f;
+        e=LineareAlgebra.manhattenDistance(a,b);
+        f=LineareAlgebra.manhattenDistance(d,c);
+
+        assertEquals(e,f,0.0);
+        assertEquals(test,e,0.1);
+    }
+
+    @Test
+    public void manhattenDistanceFunctionZero3D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D c = new Vektor2D(2,2);
+        double e;
+
+        e=LineareAlgebra.manhattenDistance(a,a);
+
+        assertEquals(0.0,e,0.0);
+    }
+
+    @Test
+    public void manhattenDistanceFunctionZero2D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        double e;
+
+        e=LineareAlgebra.manhattenDistance(a,a);
+
+        assertEquals(0.0,e,0.0);
+    }
+
+    @Test
+    public void manhattenDistanceConsistency(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D atest = new Vektor2D(2,2);
+        Vektor3D b = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,2);
+
+        LineareAlgebra.manhattenDistance(a,a);
+        LineareAlgebra.manhattenDistance(b,b);
+
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+
 //CrossProduct Test
 
+
+
+    @Test
+    public void crossProductFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(4,6,8);
+        Vektor3D c = new Vektor3D(2,2,2);
+        Vektor3D d = new Vektor3D(4,6,8);
+        Vektor3D atest = new Vektor3D(4,-8,4);
+        Vektor3D btest = new Vektor3D(-4,8,-4);
+        a=LineareAlgebra.crossProduct(a,b);
+        b=LineareAlgebra.crossProduct(d,c);
+
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(atest.z,a.z,0.0);
+
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+    @Test
+    public void crossProductFunctionZero3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+
+        a=LineareAlgebra.crossProduct(a,a);
+
+        assertEquals(0.0,a.x,0.0);
+        assertEquals(0.0,a.y,0.0);
+        assertEquals(0.0,a.z,0.0);
+    }
+
+    @Test
+    public void crossProductConsistency(){
+        Vektor3D b = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,2);
+
+        LineareAlgebra.crossProduct(b,b);
+
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+
 //DotProduct Test
+
+    @Test
+    public void dotProductFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(4,6,8);
+        Vektor3D c = new Vektor3D(2,2,2);//8 12 16
+        Vektor3D d = new Vektor3D(4,6,8);
+        double test = 36.0;
+        double e,f;
+        e=LineareAlgebra.dotProduct(a,b);
+        f=LineareAlgebra.dotProduct(d,c);
+
+        assertEquals(e,f,0.0);
+        assertEquals(test,e,0.1);
+    }
+
+    @Test
+    public void dotProductFunction2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(4,6);
+        Vektor2D c = new Vektor2D(2,2);
+        Vektor2D d = new Vektor2D(4,6);
+        double test = 20.0;
+        double e,f;
+        e=LineareAlgebra.dotProduct(a,b);
+        f=LineareAlgebra.dotProduct(d,c);
+
+        assertEquals(e,f,0.0);
+        assertEquals(test,e,0.1);
+    }
+
+    @Test
+    public void dotProductConsistency(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D atest = new Vektor2D(2,2);
+        Vektor3D b = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,2);
+
+        LineareAlgebra.dotProduct(a,a);
+        LineareAlgebra.dotProduct(b,b);
+
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
 
 //CosEquation Test
 
