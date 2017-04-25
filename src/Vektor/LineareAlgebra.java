@@ -245,6 +245,9 @@ public class LineareAlgebra {
     }
 
     public static double cosEquation(Vektor3D a, Vektor3D b) throws Exception {
+        if(a.isNullFector()||b.isNullFector()){
+            throw new Exception("no Angle to Null Vektor Defined");
+        }
         double atemp, btemp, abtemp;
         abtemp=dotProduct(a,b);
         atemp=length(a);
@@ -253,6 +256,9 @@ public class LineareAlgebra {
     }
 
     public static double cosEquation(Vektor2D a, Vektor2D b) throws Exception {
+        if(a.isNullFector()||b.isNullFector()){
+            throw new Exception("no Angle to Null Vektor Defined");
+        }
         double atemp, btemp, abtemp;
         abtemp=dotProduct(a,b);
         atemp=length(a);
@@ -271,10 +277,45 @@ public class LineareAlgebra {
     }
 
     public static double sinEquation(Vektor3D a, Vektor3D b) throws Exception {
+        if(a.isNullFector()||b.isNullFector()){
+            throw new Exception("no Angle to Null Vektor Defined");
+        }
         double atemp, btemp, abtemp;
         abtemp=length(crossProduct(a,b));
         atemp=length(a);
         btemp=length(b);
         return cosEquation(atemp,btemp,abtemp);
+    }
+
+    public static double angleRad(Vektor3D a, Vektor3D b) throws Exception {
+        return Math.acos(cosEquation(a,b));
+    }
+
+    public static double angleRad(Vektor2D a, Vektor2D b) throws Exception {
+        return Math.acos(cosEquation(a,b));
+    }
+
+    public static double angleDegree(Vektor3D a, Vektor3D b) throws Exception {
+        return Math.toDegrees(angleRad(a,b));
+    }
+
+    public static double angleDegree(Vektor2D a, Vektor2D b) throws Exception {
+        return radToDegree(angleRad(a,b));
+    }
+
+    public static double radToDegree(double rad) {
+        return Math.toDegrees(rad);
+    }
+
+    public static double DegreeToRad(double degree) {
+        return Math.toRadians(degree);
+    }
+
+    public static double determinante(Vektor2D a, Vektor2D b) {
+        return (a.x*b.y-a.y*b.x);
+    }
+
+    public static double determinante(Vektor3D a, Vektor3D b, Vektor3D c) {
+        return ((a.x*b.y*c.z+b.x*c.y*a.z+c.x*a.y*b.z)-(c.x*b.y*a.z+a.x*c.y*b.z+b.x*a.y*c.z));
     }
 }
