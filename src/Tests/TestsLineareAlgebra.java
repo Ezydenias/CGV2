@@ -1236,11 +1236,460 @@ public class TestsLineareAlgebra {
 
 //CosEquation Test
 
+    @Test
+    public void cosEquationFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        double testa=0;
+        double testb=0;
+        double controllvalue=0.98019;
+        try{
+        testa = LineareAlgebra.cosEquation(a,b);
+        testb = LineareAlgebra.cosEquation(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void cosEquationZero3D(){
+        Vektor3D a = new Vektor3D(0,0,0);
+        Vektor3D b = new Vektor3D(0,0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.cosEquation(a, b);
+            testb = LineareAlgebra.cosEquation(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void cosEquationConsistency3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        Vektor3D atest = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,3);
+        try {
+            LineareAlgebra.cosEquation(a, b);
+            LineareAlgebra.cosEquation(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(atest.z,a.z,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+    @Test
+    public void cosEquationFunction2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(2,3);
+        double testa=0;
+        double testb=0;
+        double controllvalue=0.98058;
+        try{
+        testa = LineareAlgebra.cosEquation(a,b);
+        testb = LineareAlgebra.cosEquation(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void cosEquationZero2D(){
+        Vektor2D a = new Vektor2D(0,0);
+        Vektor2D b = new Vektor2D(0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.cosEquation(a, b);
+            testb = LineareAlgebra.cosEquation(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void cosEquationConsistency2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(2,3);
+        Vektor2D atest = new Vektor2D(2,2);
+        Vektor2D btest = new Vektor2D(2,3);
+        try{
+        LineareAlgebra.cosEquation(a,b);
+        LineareAlgebra.cosEquation(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+
+    }
+
+
+
 //SinEquation Test
+
+    @Test
+    public void sinEquationFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        double testa=LineareAlgebra.length(a);
+        double testb=LineareAlgebra.length(b);
+        double controllvalue=LineareAlgebra.length(LineareAlgebra.crossProduct(a,b));
+        controllvalue=(controllvalue/(testa*testb));
+        try{
+            testa = LineareAlgebra.sinEquation(a,b);
+            testb = LineareAlgebra.sinEquation(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void sinEquationZero3D(){
+        Vektor3D a = new Vektor3D(0,0,0);
+        Vektor3D b = new Vektor3D(0,0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.sinEquation(a, b);
+            testb = LineareAlgebra.sinEquation(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void sinEquationConsistency3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        Vektor3D atest = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,3);
+        try {
+            LineareAlgebra.sinEquation(a, b);
+            LineareAlgebra.sinEquation(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(atest.z,a.z,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+//    @Test
+//    public void sinEquationFunction2D(){
+//        Vektor2D a = new Vektor2D(2,2);
+//        Vektor2D b = new Vektor2D(2,3);
+//        double testa=0;
+//        double testb=0;
+//        double controllvalue=LineareAlgebra.length(LineareAlgebra.crossProduct(a,b));
+//        try{
+//            testa = LineareAlgebra.sinEquation(a,b);
+//            testb = LineareAlgebra.sinEquation(b,a);
+//        }catch (Exception e){
+//            System.out.println("something went wrong");
+//        }
+//        assertEquals(testa,testb,0.0);
+//        assertEquals(controllvalue,testb,0.01);
+//        assertEquals(controllvalue,testb,0.01);
+//    }
+//
+//    @Test
+//    public void sinEquationZero2D(){
+//        Vektor2D a = new Vektor2D(0,0);
+//        Vektor2D b = new Vektor2D(0,0);
+//        double testa=0;
+//        double testb=0;
+//        try {
+//            testa = LineareAlgebra.sinEquation(a, b);
+//            testb = LineareAlgebra.sinEquation(b, a);
+//        }catch (Exception e){
+//            System.out.println("something went wrong");
+//        }
+//        assertEquals(testa,testb,0.0);
+//        assertEquals(0.0,testb,0.01);
+//        assertEquals(0.0,testb,0.01);
+//
+//    }
+//
+//    @Test
+//    public void sinEquationConsistency2D(){
+//        Vektor2D a = new Vektor2D(2,2);
+//        Vektor2D b = new Vektor2D(2,3);
+//        Vektor2D atest = new Vektor2D(2,2);
+//        Vektor2D btest = new Vektor2D(2,3);
+//        try{
+//            LineareAlgebra.sinEquation(a,b);
+//            LineareAlgebra.sinEquation(b,a);
+//        }catch (Exception e){
+//            System.out.println("something went wrong");
+//        }
+//        assertEquals(atest.x,a.x,0.0);
+//        assertEquals(atest.y,a.y,0.0);
+//        assertEquals(btest.x,b.x,0.0);
+//        assertEquals(btest.y,b.y,0.0);
+//
+//    }
 
 //AngleRad Test
 
+    @Test
+    public void angleRadFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        double testa=0;
+        double testb=0;
+        double controllvalue=0.98019;
+        try{
+            testa = LineareAlgebra.angleRad(a,b);
+            testb = LineareAlgebra.angleRad(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void angleRadZero3D(){
+        Vektor3D a = new Vektor3D(0,0,0);
+        Vektor3D b = new Vektor3D(0,0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.angleRad(a, b);
+            testb = LineareAlgebra.angleRad(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void angleRadConsistency3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        Vektor3D atest = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,3);
+        try {
+            LineareAlgebra.angleRad(a, b);
+            LineareAlgebra.angleRad(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(atest.z,a.z,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+    @Test
+    public void angleRadFunction2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(2,3);
+        double testa=0;
+        double testb=0;
+        double controllvalue=0.98058;
+        try{
+            testa = LineareAlgebra.angleRad(a,b);
+            testb = LineareAlgebra.angleRad(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void angleRadZero2D(){
+        Vektor2D a = new Vektor2D(0,0);
+        Vektor2D b = new Vektor2D(0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.angleRad(a, b);
+            testb = LineareAlgebra.angleRad(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void angleRadConsistency2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(2,3);
+        Vektor2D atest = new Vektor2D(2,2);
+        Vektor2D btest = new Vektor2D(2,3);
+        try{
+            LineareAlgebra.angleRad(a,b);
+            LineareAlgebra.angleRad(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+
+    }
+
 //AngleDegree Test
+
+
+    @Test
+    public void angleRadFunction3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        double testa=0;
+        double testb=0;
+        double controllvalue=0.98019;
+        try{
+            testa = LineareAlgebra.angleRad(a,b);
+            testb = LineareAlgebra.angleRad(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void angleRadZero3D(){
+        Vektor3D a = new Vektor3D(0,0,0);
+        Vektor3D b = new Vektor3D(0,0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.angleRad(a, b);
+            testb = LineareAlgebra.angleRad(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void angleRadConsistency3D(){
+        Vektor3D a = new Vektor3D(2,2,2);
+        Vektor3D b = new Vektor3D(2,2,3);
+        Vektor3D atest = new Vektor3D(2,2,2);
+        Vektor3D btest = new Vektor3D(2,2,3);
+        try {
+            LineareAlgebra.angleRad(a, b);
+            LineareAlgebra.angleRad(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(atest.z,a.z,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+        assertEquals(btest.z,b.z,0.0);
+    }
+
+    @Test
+    public void angleRadFunction2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(2,3);
+        double testa=0;
+        double testb=0;
+        double controllvalue=0.98058;
+        try{
+            testa = LineareAlgebra.angleRad(a,b);
+            testb = LineareAlgebra.angleRad(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(controllvalue,testb,0.01);
+        assertEquals(controllvalue,testb,0.01);
+    }
+
+    @Test
+    public void angleRadZero2D(){
+        Vektor2D a = new Vektor2D(0,0);
+        Vektor2D b = new Vektor2D(0,0);
+        double testa=0;
+        double testb=0;
+        try {
+            testa = LineareAlgebra.angleRad(a, b);
+            testb = LineareAlgebra.angleRad(b, a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(testa,testb,0.0);
+        assertEquals(0.0,testb,0.01);
+        assertEquals(0.0,testb,0.01);
+
+    }
+
+    @Test
+    public void angleRadConsistency2D(){
+        Vektor2D a = new Vektor2D(2,2);
+        Vektor2D b = new Vektor2D(2,3);
+        Vektor2D atest = new Vektor2D(2,2);
+        Vektor2D btest = new Vektor2D(2,3);
+        try{
+            LineareAlgebra.angleRad(a,b);
+            LineareAlgebra.angleRad(b,a);
+        }catch (Exception e){
+            System.out.println("something went wrong");
+        }
+        assertEquals(atest.x,a.x,0.0);
+        assertEquals(atest.y,a.y,0.0);
+        assertEquals(btest.x,b.x,0.0);
+        assertEquals(btest.y,b.y,0.0);
+
+    }
+
 
 //RadToDegree Test
 

@@ -243,4 +243,38 @@ public class LineareAlgebra {
         double temp = a.x * b.x + a.y * b.y;
         return temp;
     }
+
+    public static double cosEquation(Vektor3D a, Vektor3D b) throws Exception {
+        double atemp, btemp, abtemp;
+        abtemp=dotProduct(a,b);
+        atemp=length(a);
+        btemp=length(b);
+        return cosEquation(atemp,btemp,abtemp);
+    }
+
+    public static double cosEquation(Vektor2D a, Vektor2D b) throws Exception {
+        double atemp, btemp, abtemp;
+        abtemp=dotProduct(a,b);
+        atemp=length(a);
+        btemp=length(b);
+        return cosEquation(atemp,btemp,abtemp);
+    }
+
+    private static double cosEquation(double a, double b, double ab)    throws  Exception{
+        if (ab==0){
+            return 0;
+        } else if (a==0||b==0){
+            throw new Exception("Division with Zero still Undefined and something divided with 0 is not interpretable in this context");
+        } else {
+            return (ab/(a*b));
+        }
+    }
+
+    public static double sinEquation(Vektor3D a, Vektor3D b) throws Exception {
+        double atemp, btemp, abtemp;
+        abtemp=length(crossProduct(a,b));
+        atemp=length(a);
+        btemp=length(b);
+        return cosEquation(atemp,btemp,abtemp);
+    }
 }
