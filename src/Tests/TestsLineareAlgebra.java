@@ -1684,7 +1684,7 @@ public class TestsLineareAlgebra {
         assertEquals(atest.x, a.x, 0.0);
         assertEquals(atest.y, a.y, 0.0);
         assertEquals(btest.x, b.x, 0.0);
-        assertEquals(btest.y, b.y, 0.0);
+        assertEquals(btest.y, b.y, 0.0);\\sadasd
     }
 
 
