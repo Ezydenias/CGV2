@@ -634,6 +634,24 @@ public class TestsVektor2D {
         assertEquals(a.y, l, 0.1);
     }
 
+    @Test
+    public void testinfinityinitialized(){
+        Vektor2D a = new Vektor2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
+        Vektor2D b = new Vektor2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
+        Vektor2D c = new Vektor2D(3.0,Double.NEGATIVE_INFINITY);
+        Vektor2D d = new Vektor2D(Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY);
+
+        assertEquals(0.0,a.x,0.0);
+        assertEquals(0.0,a.y,0.0);
+        assertEquals(0.0,b.x,0.0);
+        assertEquals(0.0,b.y,0.0);
+        assertEquals(0.0,c.x,0.0);
+        assertEquals(0.0,c.y,0.0);
+        assertEquals(0.0,d.x,0.0);
+        assertEquals(0.0,d.y,0.0);
+
+    }
+
     //Length
 
     @Test

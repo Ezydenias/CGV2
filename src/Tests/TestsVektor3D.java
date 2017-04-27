@@ -32,6 +32,23 @@ public class TestsVektor3D {
         assertNotEquals(a.z, b.z, 0.0);
     }
 
+    @Test
+    public void testinfinityinitialized(){
+        Vektor3D a = new Vektor3D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
+        Vektor3D b = new Vektor3D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
+        Vektor3D c = new Vektor3D(3.0,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY);
+
+        assertEquals(0.0,a.x,0.0);
+        assertEquals(0.0,a.y,0.0);
+        assertEquals(0.0,a.z,0.0);
+        assertEquals(0.0,b.x,0.0);
+        assertEquals(0.0,b.y,0.0);
+        assertEquals(0.0,b.z,0.0);
+        assertEquals(0.0,c.x,0.0);
+        assertEquals(0.0,c.y,0.0);
+        assertEquals(0.0,c.z,0.0);
+    }
+
 
     //Add Tests
 

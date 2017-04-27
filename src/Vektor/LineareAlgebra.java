@@ -318,4 +318,39 @@ public class LineareAlgebra {
     public static double determinante(Vektor3D a, Vektor3D b, Vektor3D c) {
         return ((a.x*b.y*c.z+b.x*c.y*a.z+c.x*a.y*b.z)-(c.x*b.y*a.z+a.x*c.y*b.z+b.x*a.y*c.z));
     }
+
+    public static double abs(double a) {
+        if (a<0){
+            return -a;
+        }else{
+            return a;
+        }
+    }
+
+    public static Vektor3D abs(Vektor3D a) {
+        Vektor3D temp = new Vektor3D(a);
+        temp.x=abs(temp.x);
+        temp.y=abs(temp.y);
+        temp.z=abs(temp.z);
+        return temp;
+    }
+
+    public static Vektor2D abs(Vektor2D a) {
+        Vektor2D temp = new Vektor2D(a);
+        temp.x=abs(temp.x);
+        temp.y=abs(temp.y);
+        return temp;
+    }
+
+    public static String show(Vektor3D a) {
+        String temp = "["+a.x+","+a.y+","+a.z+"}";
+        System.out.println(temp);
+        return temp;
+    }
+
+    public static String show(Vektor2D a) {
+        String temp = "["+a.x+","+a.y+"}";
+        System.out.println(temp);
+        return temp;
+    }
 }

@@ -23,9 +23,13 @@ public class Vektor3D {
     }
 
     public void setPosition(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        if(x==Double.POSITIVE_INFINITY || y==Double.POSITIVE_INFINITY|| z==Double.POSITIVE_INFINITY||x==Double.NEGATIVE_INFINITY || y==Double.NEGATIVE_INFINITY|| z==Double.NEGATIVE_INFINITY) {
+            System.out.println("Infinity not allowed, initialised with 0");
+        }else {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
     }
 
     public void setPosition(Vektor3D a) {

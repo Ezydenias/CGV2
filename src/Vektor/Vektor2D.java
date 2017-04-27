@@ -14,6 +14,8 @@ public class Vektor2D {
     }
 
     public Vektor2D(double x, double y) {
+        this.x=0;
+        this.y=0;
         this.setPosition(x, y);
     }
 
@@ -23,8 +25,12 @@ public class Vektor2D {
     }
 
     public void setPosition(double x, double y) {
-        this.x = x;
-        this.y = y;
+        if(x==Double.POSITIVE_INFINITY || y==Double.POSITIVE_INFINITY||x==Double.NEGATIVE_INFINITY || y==Double.NEGATIVE_INFINITY){
+            System.out.println("Infinity not allowed, initialised with 0");
+        } else {
+            this.x = x;
+            this.y = y;
+        }
     }
 
     public void setPosition(Vektor2D a) {
