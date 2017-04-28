@@ -17,12 +17,34 @@ public class TestsVektor2D {
     public void testCopyConstruktor() {
         Vektor2D a = new Vektor2D(2, 2);
         Vektor2D b = new Vektor2D(a);
+        Vektor2D c = new Vektor2D();
 
         assertEquals(a.x, b.x, 0.0);
         assertEquals(a.y, b.y, 0.0);
         b.setPosition(3, 3);
         assertNotEquals(a.x, b.x, 0.0);
         assertNotEquals(a.y, b.y, 0.0);
+
+        assertEquals(0.0,c.x,0.0);
+        assertEquals(0.0,c.y,0.0);
+    }
+
+    @Test
+    public void testinfinityinitialized(){
+        Vektor2D a = new Vektor2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
+        Vektor2D b = new Vektor2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
+        Vektor2D c = new Vektor2D(3.0,Double.NEGATIVE_INFINITY);
+        Vektor2D d = new Vektor2D(Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY);
+
+        assertEquals(0.0,a.x,0.0);
+        assertEquals(0.0,a.y,0.0);
+        assertEquals(0.0,b.x,0.0);
+        assertEquals(0.0,b.y,0.0);
+        assertEquals(0.0,c.x,0.0);
+        assertEquals(0.0,c.y,0.0);
+        assertEquals(0.0,d.x,0.0);
+        assertEquals(0.0,d.y,0.0);
+
     }
 
 
@@ -434,6 +456,27 @@ public class TestsVektor2D {
         }
     }
 
+    @Test(expected = Exception.class)
+    public void divOverflowMaxBoth() throws Exception {
+        Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
+        a.div(Double.MIN_VALUE, Double.MIN_VALUE);
+    }
+    @Test(expected = Exception.class)
+    public void divOverflowMax() throws Exception {
+        Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
+        a.div(Double.MIN_VALUE);
+    }
+
+    @Test(expected = Exception.class)
+    public void divOverflowMaxright() throws Exception {
+        Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
+        a.div(1, Double.MIN_VALUE);
+    }
+    @Test(expected = Exception.class)
+    public void divOverflowMaxleft() throws Exception {
+        Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
+        a.div(Double.MIN_VALUE, 1);
+    }
 
     @Test(expected = Exception.class)
     public void divZero() throws Exception {
@@ -632,25 +675,11 @@ public class TestsVektor2D {
         }
         assertEquals(a.x, k, 0.1);
         assertEquals(a.y, l, 0.1);
+
+        assertEquals(a.length(),1.0,0.1);
     }
 
-    @Test
-    public void testinfinityinitialized(){
-        Vektor2D a = new Vektor2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
-        Vektor2D b = new Vektor2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
-        Vektor2D c = new Vektor2D(3.0,Double.NEGATIVE_INFINITY);
-        Vektor2D d = new Vektor2D(Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY);
 
-        assertEquals(0.0,a.x,0.0);
-        assertEquals(0.0,a.y,0.0);
-        assertEquals(0.0,b.x,0.0);
-        assertEquals(0.0,b.y,0.0);
-        assertEquals(0.0,c.x,0.0);
-        assertEquals(0.0,c.y,0.0);
-        assertEquals(0.0,d.x,0.0);
-        assertEquals(0.0,d.y,0.0);
-
-    }
 
     //Length
 

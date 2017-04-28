@@ -734,6 +734,20 @@ public class TestsLineareAlgebra {
         LineareAlgebra.div(a, 0);
     }
 
+    @Test(expected = Exception.class)
+    public void divsmalvalue3D() throws Exception {
+        Vektor3D a = new Vektor3D();
+        a.setPosition(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
+        LineareAlgebra.div(a, Double.MIN_VALUE);
+    }
+
+    @Test(expected = Exception.class)
+    public void divsmalvalue2D() throws Exception {
+        Vektor2D a = new Vektor2D();
+        a.setPosition(Double.MAX_VALUE, Double.MAX_VALUE);
+        LineareAlgebra.div(a, Double.MIN_VALUE);
+    }
+
     @Test
     public void divOverflow2D() {
         try {

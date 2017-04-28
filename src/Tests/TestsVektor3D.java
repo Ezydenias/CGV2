@@ -22,6 +22,7 @@ public class TestsVektor3D {
     public void testCopyConstruktor() {
         Vektor3D a = new Vektor3D(2, 2,2);
         Vektor3D b = new Vektor3D(a);
+        Vektor3D c = new Vektor3D();
 
         assertEquals(a.x, b.x, 0.0);
         assertEquals(a.y, b.y, 0.0);
@@ -30,6 +31,10 @@ public class TestsVektor3D {
         assertNotEquals(a.x, b.x, 0.0);
         assertNotEquals(a.y, b.y, 0.0);
         assertNotEquals(a.z, b.z, 0.0);
+
+        assertEquals(0.0,c.x,0.0);
+        assertEquals(0.0,c.y,0.0);
+        assertEquals(0.0,c.z,0.0);
     }
 
     @Test
