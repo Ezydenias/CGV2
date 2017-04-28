@@ -1806,6 +1806,7 @@ public class TestsLineareAlgebra {
         assertEquals(0.0, test, 0.0);
     }
 
+    @Test
     public void determinanteConsistency3D() {
         Vektor3D a = new Vektor3D(2, 4, 6);
         Vektor3D b = new Vektor3D(2, 4, 6);
@@ -1836,6 +1837,7 @@ public class TestsLineareAlgebra {
         assertEquals(0.0, test, 0.0);
     }
 
+    @Test
     public void determinanteConsistency2D() {
         Vektor2D a = new Vektor2D(2, 4);
         Vektor2D b = new Vektor2D(2, 4);
@@ -1895,11 +1897,18 @@ public class TestsLineareAlgebra {
 
     }
 
+    @Test
     public void absfunction2D() {
         Vektor2D a = new Vektor2D(2, -4);
         Vektor2D b = new Vektor2D(-2, 4);
         Vektor2D c = new Vektor2D(-2, -4);
         Vektor2D d = new Vektor2D(2, 4);
+
+        a = LineareAlgebra.abs(a);
+        b = LineareAlgebra.abs(b);
+        c = LineareAlgebra.abs(c);
+        d = LineareAlgebra.abs(d);
+
 
         assertEquals(2.0, a.x, 0.0);
         assertEquals(4.0, a.y, 0.0);
