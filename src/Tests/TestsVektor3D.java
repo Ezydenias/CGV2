@@ -4,16 +4,8 @@
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 import Vektor.*;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import Vektor.*;
-import org.omg.IOP.ExceptionDetailMessage;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 
 public class TestsVektor3D {
@@ -38,7 +30,7 @@ public class TestsVektor3D {
     }
 
     @Test
-    public void testinfinityinitialized(){
+    public void testInfinityInitialized(){
         Vektor3D a = new Vektor3D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
         Vektor3D b = new Vektor3D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
         Vektor3D c = new Vektor3D(3.0,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY);
@@ -131,7 +123,7 @@ public class TestsVektor3D {
 
 
     @Test
-    public void addFunktion() {
+    public void addFunction() {
         try {
             Vektor3D a = new Vektor3D();
             a.setPosition(1, 1,1);
@@ -165,7 +157,7 @@ public class TestsVektor3D {
 
     //Sub Tests
     @Test
-    public void subKonsistens() {
+    public void subConsistency() {
         try {
             Vektor3D a = new Vektor3D();
             a.setPosition(2.0, 2.0,2.0);
@@ -266,7 +258,7 @@ public class TestsVektor3D {
 
 
     @Test
-    public void subFunktion() {
+    public void subFunction() {
 
         Vektor3D a = new Vektor3D();
         a.setPosition(2, 2,2);
@@ -319,7 +311,7 @@ public class TestsVektor3D {
     }
 
     @Test(expected = Exception.class)
-    public void multOverflowMaxNegativeRight() throws Exception {
+    public void multOverflowMaxRightNegative() throws Exception {
         Vektor3D a = new Vektor3D(-Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE);
         a.mult(-Double.MAX_VALUE, 1,1);
     }
@@ -560,7 +552,7 @@ public class TestsVektor3D {
     }
 
     @Test
-    public void DivFunction() {
+    public void divFunction() {
         Vektor3D a = new Vektor3D();
         a.setPosition(4, 4,4);
 
@@ -577,7 +569,7 @@ public class TestsVektor3D {
     }
 
     @Test
-    public void DivFunctionLeft() {
+    public void divFunctionLeft() {
         Vektor3D a = new Vektor3D();
         a.setPosition(4, 4,4);
 
@@ -594,7 +586,7 @@ public class TestsVektor3D {
     }
 
     @Test
-    public void DivFunctionRight() {
+    public void divFunctionRight() {
         Vektor3D a = new Vektor3D();
         a.setPosition(4, 4,4);
 
@@ -611,7 +603,7 @@ public class TestsVektor3D {
     }
 
     @Test
-    public void DivFunctionMiddle() {
+    public void divFunctionMiddle() {
         Vektor3D a = new Vektor3D();
         a.setPosition(4, 4,4);
 
@@ -628,7 +620,7 @@ public class TestsVektor3D {
     }
 
     @Test
-    public void DivFunctionBoth() {
+    public void divFunctionBoth() {
         Vektor3D a = new Vektor3D();
         a.setPosition(4, 4,4);
 
@@ -726,12 +718,12 @@ public class TestsVektor3D {
         Vektor3D b = new Vektor3D(-2, -2,-2);
         Vektor3D c = new Vektor3D(0, 0,0);
 
-        assertFalse(a.isNullFector());
-        assertFalse(b.isNullFector());
-        assertTrue(c.isNullFector());
-        assertFalse(a.isNullFector());
-        assertFalse(b.isNullFector());
-        assertTrue(c.isNullFector());
+        assertFalse(a.isNullVector());
+        assertFalse(b.isNullVector());
+        assertTrue(c.isNullVector());
+        assertFalse(a.isNullVector());
+        assertFalse(b.isNullVector());
+        assertTrue(c.isNullVector());
     }
 
     //Normalize

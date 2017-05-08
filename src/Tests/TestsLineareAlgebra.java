@@ -225,12 +225,6 @@ public class TestsLineareAlgebra {
         }
     }
 
-//    @Test (expected = Exception)                                              //Doesn't work at all anyway
-//    public void AddDifferentDimensions() throws Exception{
-//        Vektor2D a = new Vektor2D(2,2);
-//        Vektor3D b = new Vektor3D(2,2,2);
-//        LineareAlgebra.add(a,b);
-//    }
 
     @Test
     public void AddConsistency() {
@@ -270,7 +264,7 @@ public class TestsLineareAlgebra {
 //Sub Test
 
     @Test
-    public void subKonsistens3D() {
+    public void subConsistency3D() {
         try {
             Vektor3D a = new Vektor3D();
             a.setPosition(2.0, 2.0, 2.0);
@@ -371,7 +365,7 @@ public class TestsLineareAlgebra {
 
 
     @Test
-    public void subFunktion3D() {
+    public void subFunction3D() {
 
         Vektor3D a = new Vektor3D();
         a.setPosition(2, 2, 2);
@@ -391,7 +385,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void subKonsistens2D() {
+    public void subConsistency2D() {
         try {
             Vektor2D a = new Vektor2D();
             a.setPosition(2.0, 2.0);
@@ -486,7 +480,7 @@ public class TestsLineareAlgebra {
 
 
     @Test
-    public void subFunktion2D() {
+    public void subFunction2D() {
 
         Vektor2D a = new Vektor2D();
         a.setPosition(2, 2);
@@ -505,15 +499,8 @@ public class TestsLineareAlgebra {
 
     }
 
-//    @Test(expected = Exception)                                               //Doesn't WOrk Anyway
-//    public void SubDifferentDimensions() throws Exception {
-//        Vektor2D a = new Vektor2D(2, 2);
-//        Vektor3D b = new Vektor3D(2, 2, 2);
-//        LineareAlgebra.add(a, b);
-//    }
-
     @Test
-    public void SubConsistencyLineareAlgebraExclusive() {
+    public void subConsistencyLineareAlgebraExclusive() {
         try {
             Vektor2D a = new Vektor2D(2, 2);
             Vektor2D atest = new Vektor2D(2, 2);
@@ -711,7 +698,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void DivFunction3D() {
+    public void divFunction3D() {
         Vektor3D a = new Vektor3D();
         a.setPosition(4, 4, 4);
 
@@ -735,14 +722,14 @@ public class TestsLineareAlgebra {
     }
 
     @Test(expected = Exception.class)
-    public void divsmalvalue3D() throws Exception {
+    public void divSmallValue3D() throws Exception {
         Vektor3D a = new Vektor3D();
         a.setPosition(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
         LineareAlgebra.div(a, Double.MIN_VALUE);
     }
 
     @Test(expected = Exception.class)
-    public void divsmalvalue2D() throws Exception {
+    public void divSmallValue2D() throws Exception {
         Vektor2D a = new Vektor2D();
         a.setPosition(Double.MAX_VALUE, Double.MAX_VALUE);
         LineareAlgebra.div(a, Double.MIN_VALUE);
@@ -882,7 +869,42 @@ public class TestsLineareAlgebra {
 //IsNotEqual Test
 
     @Test
-    public void isNotEqualFunction() {
+    public void isNotEqualFunction2D() {
+        Vektor2D a = new Vektor2D(2, 2);
+        Vektor2D b = new Vektor2D(2, 2);
+        Vektor2D c = new Vektor2D(4, 4);
+
+        assertTrue(LineareAlgebra.isNotEqual(c, a));
+        assertTrue(LineareAlgebra.isNotEqual(a, c));
+        assertFalse(LineareAlgebra.isNotEqual(b, a));
+        assertFalse(LineareAlgebra.isNotEqual(a, b));
+    }
+
+    @Test
+    public void isNotEqualSign2D() {
+        Vektor2D a = new Vektor2D(2, 2);
+        Vektor2D b = new Vektor2D(-2, -2);
+        Vektor2D c = new Vektor2D(-4, -4);
+
+        assertTrue(LineareAlgebra.isNotEqual(c, a));
+        assertTrue(LineareAlgebra.isNotEqual(a, c));
+        assertTrue(LineareAlgebra.isNotEqual(b, a));
+        assertTrue(LineareAlgebra.isNotEqual(a, b));
+    }
+
+    @Test
+    public void isNotEqualConsistency2D() {
+        Vektor2D a = new Vektor2D(2, 2);
+        Vektor2D b = new Vektor2D(2, 2);
+        Vektor2D c = new Vektor2D(-4, -4);
+
+        assertTrue(LineareAlgebra.isNotEqual(c, a));
+        assertTrue(LineareAlgebra.isNotEqual(a, c));
+        assertTrue(LineareAlgebra.isNotEqual(c, b));
+        assertTrue(LineareAlgebra.isNotEqual(b, c));
+    }
+ @Test
+    public void isNotEqualFunction3D() {
         Vektor3D a = new Vektor3D(2, 2, 2);
         Vektor3D b = new Vektor3D(2, 2, 2);
         Vektor3D c = new Vektor3D(4, 4, 4);
@@ -894,7 +916,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void isNotEqualSign() {
+    public void isNotEqualSign3D() {
         Vektor3D a = new Vektor3D(2, 2, 2);
         Vektor3D b = new Vektor3D(-2, -2, -2);
         Vektor3D c = new Vektor3D(-4, -4, -4);
@@ -906,7 +928,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void isNotEqualConsistency() {
+    public void isNotEqualConsistency3D() {
         Vektor3D a = new Vektor3D(2, 2, 2);
         Vektor3D b = new Vektor3D(2, 2, 2);
         Vektor3D c = new Vektor3D(-4, -4, -4);
@@ -975,6 +997,7 @@ public class TestsLineareAlgebra {
         assertEquals(a.x, k, 0.1);
         assertEquals(a.y, l, 0.1);
         assertEquals(a.z, m, 0.1);
+
     }
 
     @Test
@@ -992,7 +1015,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void normalizeConsistencyLinearAlgebraExclusive() {
+    public void normalizeConsistency() {
         Vektor2D a = new Vektor2D(2, 2);
         Vektor2D aTest = new Vektor2D(2, 2);
         Vektor3D b = new Vektor3D(2, 2, 2);
@@ -1404,60 +1427,7 @@ public class TestsLineareAlgebra {
         assertEquals(btest.z, b.z, 0.0);
     }
 
-//    @Test
-//    public void sinEquationFunction2D(){
-//        Vektor2D a = new Vektor2D(2,2);
-//        Vektor2D b = new Vektor2D(2,3);
-//        double testa=0;
-//        double testb=0;
-//        double controllvalue=LineareAlgebra.length(LineareAlgebra.crossProduct(a,b));
-//        try{
-//            testa = LineareAlgebra.sinEquation(a,b);
-//            testb = LineareAlgebra.sinEquation(b,a);
-//        }catch (Exception e){
-//            System.out.println("something went wrong");
-//        }
-//        assertEquals(testa,testb,0.0);
-//        assertEquals(controllvalue,testb,0.01);
-//        assertEquals(controllvalue,testb,0.01);
-//    }
-//
-//    @Test
-//    public void sinEquationZero2D(){
-//        Vektor2D a = new Vektor2D(0,0);
-//        Vektor2D b = new Vektor2D(0,0);
-//        double testa=0;
-//        double testb=0;
-//        try {
-//            testa = LineareAlgebra.sinEquation(a, b);
-//            testb = LineareAlgebra.sinEquation(b, a);
-//        }catch (Exception e){
-//            System.out.println("something went wrong");
-//        }
-//        assertEquals(testa,testb,0.0);
-//        assertEquals(0.0,testb,0.01);
-//        assertEquals(0.0,testb,0.01);
-//
-//    }
-//
-//    @Test
-//    public void sinEquationConsistency2D(){
-//        Vektor2D a = new Vektor2D(2,2);
-//        Vektor2D b = new Vektor2D(2,3);
-//        Vektor2D atest = new Vektor2D(2,2);
-//        Vektor2D btest = new Vektor2D(2,3);
-//        try{
-//            LineareAlgebra.sinEquation(a,b);
-//            LineareAlgebra.sinEquation(b,a);
-//        }catch (Exception e){
-//            System.out.println("something went wrong");
-//        }
-//        assertEquals(atest.x,a.x,0.0);
-//        assertEquals(atest.y,a.y,0.0);
-//        assertEquals(btest.x,b.x,0.0);
-//        assertEquals(btest.y,b.y,0.0);
-//
-//    }
+
 
 //AngleRad Test
 
@@ -1503,7 +1473,7 @@ public class TestsLineareAlgebra {
             testa = LineareAlgebra.angleRad(a, b);
             testb = LineareAlgebra.angleRad(b, a);
             testc = LineareAlgebra.angleRad(c, a);
-        } catch (Exception e) {
+ } catch (Exception e) {
             System.out.println("something went wrong");
         }
         assertEquals(testa, testb, 0.0);
@@ -1772,7 +1742,7 @@ public class TestsLineareAlgebra {
 //DegreeToRad Test
 
     @Test
-    public void DegreeToRadFunction() {
+    public void degreeToRadFunction() {
         double rad;
         double degree = 90;
 
@@ -1782,7 +1752,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void DegreeToRadConsistency() {
+    public void degreeToRadConsistency() {
         double rad;
         double degreetest = 90;
         double degree = 90;
@@ -1854,7 +1824,7 @@ public class TestsLineareAlgebra {
 //Abs Test
 
     @Test
-    public void absSinglefunction() {
+    public void absFunctionSingle() {
         double a = -6;
         double b = 7;
 
@@ -1866,7 +1836,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void absfunction3D() {
+    public void absFunction3D() {
         Vektor3D a = new Vektor3D(3, -6, 9);
         Vektor3D b = new Vektor3D(-3, 6, 9);
         Vektor3D c = new Vektor3D(3, 6, -9);
@@ -1898,7 +1868,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void absfunction2D() {
+    public void absFunction2D() {
         Vektor2D a = new Vektor2D(2, -4);
         Vektor2D b = new Vektor2D(-2, 4);
         Vektor2D c = new Vektor2D(-2, -4);
@@ -1921,7 +1891,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void absconsisency() {
+    public void absConsisency() {
         double a = -6.0;
         double atest = -6.0;
         Vektor2D b = new Vektor2D(-2, -4);
@@ -1942,7 +1912,7 @@ public class TestsLineareAlgebra {
     }
 
     @Test
-    public void absextratests() {
+    public void absExtraTests() {
         Vektor2D a = new Vektor2D(0, 0);
         Vektor2D atest = new Vektor2D(0, 0);
         Vektor2D b = new Vektor2D(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
@@ -1965,7 +1935,7 @@ public class TestsLineareAlgebra {
 //Show Test
 
     @Test
-    public void showfunctionandConsistency() {
+    public void showFunctionAndConsistency() {
         Vektor3D a = new Vektor3D(3, -3, 2);
         Vektor3D atest = new Vektor3D(3, -3, 2);
         Vektor2D b = new Vektor2D(3, 0);

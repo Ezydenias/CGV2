@@ -14,6 +14,9 @@ public class Vektor3D {
     }
 
     public Vektor3D(double x, double y, double z) {
+        this.x=0;
+        this.y=0;
+        this.z=0;
         this.setPosition(x, y, z);
     }
 
@@ -23,9 +26,9 @@ public class Vektor3D {
     }
 
     public void setPosition(double x, double y, double z) {
-        if(x==Double.POSITIVE_INFINITY || y==Double.POSITIVE_INFINITY|| z==Double.POSITIVE_INFINITY||x==Double.NEGATIVE_INFINITY || y==Double.NEGATIVE_INFINITY|| z==Double.NEGATIVE_INFINITY) {
+        if(x==Double.POSITIVE_INFINITY || y==Double.POSITIVE_INFINITY||x==Double.NEGATIVE_INFINITY || y==Double.NEGATIVE_INFINITY || z==Double.POSITIVE_INFINITY || z==Double.NEGATIVE_INFINITY){
             System.out.println("Infinity not allowed, initialised with 0");
-        }else {
+        } else {
             this.x = x;
             this.y = y;
             this.z = z;
@@ -117,7 +120,7 @@ public class Vektor3D {
         }
     }
 
-    public boolean isNullFector() {
+    public boolean isNullVector() {
         if (this.x == 0 && this.y == 0 && this.z == 0) {
             return true;
         } else {
