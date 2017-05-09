@@ -9,20 +9,25 @@ import java.util.ArrayList;
  */
 public class Flock {
 
-    ArrayList<Bird> birds;
+    ArrayList<Aktor> Aktor;
 
     public Flock() {
-        birds = new ArrayList<Bird>();
+        Aktor = new ArrayList<Aktor>();
     }
 
-    void addBird(Bird birdy) {
-        birds.add(birdy);
+    void addBird(Aktor birdy) {
+        Aktor.add(birdy);
     }
 
     void run() {
-        for (Bird birdy : birds) {
-            birdy.run(birds);
+        int i = 0;
+        for (Aktor birdy : Aktor) {
+            birdy.number=i;
+            birdy.act(Aktor);
+            i++;
         }
     }
+
+
 
 }

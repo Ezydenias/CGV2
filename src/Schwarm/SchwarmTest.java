@@ -2,7 +2,7 @@ package Schwarm;
 
 /**
  * Created by Ezydenias on 5/8/2017.
- */
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -33,3 +33,5 @@ public class SchwarmTest {
         System.exit(0);
     }
 }
+
+ */
