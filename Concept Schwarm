@@ -1,0 +1,20 @@
+Erstellung der einzeltiere mit eigene klassen
+
+Vogel
+Räuber
+Random (flugzeuge, rackete, Gewehre)
+
+Einbindung in schwarm oder schwärme der einzelnen vögel, kolision von schwärmen kann verschieden reagieren, bestimmte vögel sind stüricher
+
+kolision eines vogel mit etwas heißt toter vogel
+
+kolision mit random heißt toter räuber oder vogel
+
+tote tiere verschwinden in 2d und fallen zu boden in 3d
+
+
+Ausrichtung durch geschwindigkeitsrichtung
+
+verhaltensberechnung durch blickfeld
+
+Unterteilun des spielfeldes in zellen
