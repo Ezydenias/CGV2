@@ -15,6 +15,7 @@ public class Plane extends ManMadeObjects{
     private Projectile one;         //cann have two Missles
     private Projectile two;         //planes try to kill each other
     protected Vektor3D tempvelocity;
+
     public boolean isdodging;
     public boolean isevading;
     public double effectiverange;

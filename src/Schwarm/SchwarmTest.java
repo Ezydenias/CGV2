@@ -7,6 +7,7 @@ package Schwarm;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import Vektor.LineareAlgebra;
 import Vektor.Vektor3D;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -76,6 +77,7 @@ public class SchwarmTest {
 
     private static void gameloop(Flock schwarm) {
         glTranslatef(0f, 0.0f, -20f);
+
         //glScalef(4, 4, 4);
         while (!Display.isCloseRequested()) {
             //glDrawBuffer(0);
@@ -90,10 +92,14 @@ public class SchwarmTest {
             schwarm.run();
             for (Aktor birdy : schwarm.Aktor) {
                 glLoadIdentity();
+                setRotation(birdy);
 
 
-                glTranslated((birdy.getPosition().x)/100, (birdy.getPosition().y)/100, (((birdy.getPosition().y)/100)-20));
+                glTranslated((birdy.getPosition().x) / 100, (birdy.getPosition().y) / 100, (((birdy.getPosition().y) / 100) - 20));
                 glScaled(0.25, 0.25, 0.25);
+                glRotated(birdy.rotation.x, 1.0, 0.0, 0.0);
+                glRotated(birdy.rotation.y, 0.0, 1.0, 0.0);
+                glRotated(birdy.rotation.z, 0.0, 0.0, 1.0);
                 glPushMatrix();
                 glBegin(GL_QUADS);
                 cube();
@@ -129,6 +135,67 @@ public class SchwarmTest {
             Display.sync(60);
         }
     }
+
+    private static void setRotation(Aktor birdy) {
+        Vektor3D rotation = new Vektor3D();
+        Vektor3D equirotation = new Vektor3D();
+        Vektor3D tempone = new Vektor3D(0, 1, 1);
+        Vektor3D temptwo = new Vektor3D(birdy.getVelocity());
+        try {
+            temptwo.mult(0, 1, 1);
+            rotation.x = LineareAlgebra.angleDegree(tempone, temptwo);
+            tempone.setPosition(1, 0, 1);
+            temptwo.setPosition(birdy.getVelocity());
+            temptwo.mult(1, 0, 1);
+            rotation.y = LineareAlgebra.angleDegree(tempone, temptwo);
+            tempone.setPosition(1, 1, 0);
+            temptwo.setPosition(birdy.getVelocity());
+            temptwo.mult(1, 1, 0);
+            rotation.z = LineareAlgebra.angleDegree(tempone, temptwo);
+
+            temptwo.setPosition(birdy.getVelocity());
+            if (temptwo.x < 0) {
+                rotation.x *= -1;
+                equirotation.x = -180 - rotation.x;
+            } else {
+                equirotation.x = 180 - rotation.x;
+            }
+            if (temptwo.y < 0) {
+                rotation.y *= -1;
+                equirotation.y = -180 - rotation.y;
+            } else {
+                equirotation.y = 180 - rotation.y;
+            }
+            if (temptwo.z < 0) {
+                rotation.z *= -1;
+                equirotation.z = -180 - rotation.z;
+            } else {
+                equirotation.z = 180 - rotation.z;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (Math.abs(birdy.rotation.x - rotation.x) > Math.abs(birdy.rotation.x - equirotation.x)) {
+            rotation.x = equirotation.x;
+        }
+        if (Math.abs(birdy.rotation.y - rotation.y) > Math.abs(birdy.rotation.y - equirotation.y)) {
+            rotation.y = equirotation.y;
+        }
+        if (Math.abs(birdy.rotation.z - rotation.z) > Math.abs(birdy.rotation.z - equirotation.z)) {
+            rotation.z = equirotation.z;
+        }
+
+        System.out.println("LAAAOOOOK AT MEEEE!!!!! X:" + rotation.x);
+        System.out.println("LAAAOOOOK AT MEEEE!!!!! Y:" + rotation.y);
+        System.out.println("LAAAOOOOK AT MEEEE!!!!! Z:" + rotation.z);
+
+
+        birdy.rotation.setPosition(rotation);
+    }
+
 
     private static void initDisplay() {
         try {

@@ -1959,5 +1959,31 @@ public class TestsLineareAlgebra {
         assertEquals(btest.y,b.y,0.0);
     }
 
+    @Test
+    public void angleover180(){
+        Vektor3D temp = new Vektor3D(1,0,0);
+        Vektor3D temptwo= new Vektor3D(0,-1,0);
+
+        try {
+            System.out.println(""+LineareAlgebra.angleDegree(temp, temptwo));
+            System.out.println(""+LineareAlgebra.angleRad(temp, temptwo));
+            System.out.println(""+LineareAlgebra.cosEquation(temp, temptwo));
+            System.out.println(""+LineareAlgebra.sinEquation(temp, temptwo));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+       temp.setPosition(1,0,0);
+        temptwo.setPosition(0,1,0);
+
+        try {
+            System.out.println(""+LineareAlgebra.angleDegree(temp, temptwo));
+            System.out.println(""+LineareAlgebra.angleRad(temp, temptwo));
+            System.out.println(""+LineareAlgebra.cosEquation(temp, temptwo));
+            System.out.println(""+LineareAlgebra.sinEquation(temp, temptwo));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

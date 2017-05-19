@@ -12,6 +12,7 @@ public abstract class Aktor {
 
     protected Vektor3D velocity;
     protected Vektor3D position;
+    public Vektor3D rotation;
     protected double maxSpeed;
     public int number;
     boolean alive;
@@ -19,6 +20,7 @@ public abstract class Aktor {
     public Aktor(Vektor3D velocity,Vektor3D position){
         this.velocity=velocity;
         this.position=position;
+        this.rotation=new Vektor3D();
         this.number=0;
 
         this.alive=true;
