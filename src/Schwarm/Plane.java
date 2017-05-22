@@ -21,6 +21,7 @@ public class Plane extends ManMadeObjects{
     public double effectiverange;
     public double evadingrange;
 
+
     private boolean isAlive;
 
     public Plane(Vektor3D velocity, Vektor3D position) {
@@ -37,11 +38,10 @@ public class Plane extends ManMadeObjects{
 
 
     public void act(ArrayList<Aktor> stuff) {
-       for (int i=0;i<5;i++)
+        for (int i=0;i<5;i++)
         update();
-
-        this.tempvelocity.setPosition(0,0,0);
-        flock(stuff);
+           this.tempvelocity.setPosition(0, 0, 0);
+           flock(stuff);
 
 
     }
@@ -51,9 +51,11 @@ public class Plane extends ManMadeObjects{
         try {
             System.out.print("tempvelocity"+tempvelocity.x+" "+tempvelocity.y+" "+tempvelocity.z);
             velocity.add(tempvelocity);
-            velocity.x=velocity.x%1;
-            velocity.y=velocity.y%1;
-            velocity.z=velocity.z%1;
+
+            velocity.x=velocity.x/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
+            velocity.y=velocity.y/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
+            velocity.z=velocity.z/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
+
             this.position.add(velocity);
             System.out.print(number);
 
