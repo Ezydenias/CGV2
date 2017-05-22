@@ -6,7 +6,7 @@ import Vektor.Vektor3D;
 import java.util.ArrayList;
 
 /**
- * Created by Ezydenias on 5/9/2017.
+ * Created by Ezydenias on 5/9/2017. dsfdssgfcmjkm,mfdfd
  */
 public class Bird extends Aktor {
 
