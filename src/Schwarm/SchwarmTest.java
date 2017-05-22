@@ -29,6 +29,7 @@ public class SchwarmTest {
         initGL();
         gameloop(schwarm);
         cleanUp();
+
     }
 
     private static void cleanUp() {
@@ -89,29 +90,58 @@ public class SchwarmTest {
 //            glBegin(GL_QUADS);
 //            {
 
+
+
             schwarm.run();
 
 
 
             for (Aktor birdy : schwarm.Aktor) {
                 glLoadIdentity();
-                setRotation(birdy);
 
 
 
 
 
-                glTranslated((birdy.getPosition().x) / 100, (birdy.getPosition().y) / 100, (((birdy.getPosition().y) / 100) - 20));
-                glRotated(birdy.rotation.z, 0.0, 0.0, 1.0);
-                glRotated(birdy.rotation.x, 1.0, 0.0, 0.0);
-                glRotated(birdy.rotation.y, 0.0, 1.0, 0.0);
-                glScaled(0.25, 0.25, 0.25);
-                glPushMatrix();
-                glBegin(GL_QUADS);
-                planeModell();
-                glEnd();
+                if (birdy.getClass() == Plane.class) {
+                    setRotation(birdy);
+                    glTranslated((birdy.getPosition().x) / 100, (birdy.getPosition().y) / 100, ((birdy.getPosition().z) / 100) - 40);
+                    //glRotated(90,0,0,1);
+                    glRotated(birdy.rotation.x, 1.0, 0.0, 0.0);
+                    glRotated(birdy.rotation.y, 0.0, 1.0, 0.0);
+                    glRotated(birdy.rotation.z, 0.0, 0.0, 1.0);
+                    glScaled(0.2, 0.2, 0.2);
+                    glPushMatrix();
+                    glBegin(GL_QUADS);
+                    planeModell();
+                    glEnd();
 
-                glPopMatrix();
+                    glPopMatrix();
+                }
+
+                if (birdy.getClass() == Bird.class) {
+                    glTranslated((birdy.getPosition().x) / 100, (birdy.getPosition().y) / 100, ((birdy.getPosition().z) / 100) - 40);
+                    //glRotated(90,0,0,1);
+                   // glRotated(birdy.rotation.x, 1.0, 0.0, 0.0);
+                   // glRotated(birdy.rotation.y, 0.0, 1.0, 0.0);
+                   // glRotated(birdy.rotation.z, 0.0, 0.0, 1.0);
+                    glScaled(0.1, 0.1, 0.1);
+                    glPushMatrix();
+                    glBegin(GL_QUADS);
+                    cube();
+                    glEnd();
+
+                    glPopMatrix();
+                }
+//                glLoadIdentity();
+//                glTranslated((birdy.getPosition().x+birdy.velocity.x*100) / 100, (birdy.getPosition().y-birdy.velocity.y*100) / 100, ((birdy.getPosition().z-birdy.velocity.z*100) / 100)-40);
+//                glScaled(0.1, 0.1, 0.1);
+//                glPushMatrix();
+//                glBegin(GL_QUADS);
+//                cube();
+//                glEnd();
+//
+//                glPopMatrix();
 
 
             }
@@ -147,12 +177,12 @@ public class SchwarmTest {
     private static void setRotation(Aktor birdy) {
         Vektor3D rotation = new Vektor3D();
         Vektor3D equirotation = new Vektor3D();
-        Vektor3D tempone = new Vektor3D(0, 0, 1);
+        Vektor3D tempone = new Vektor3D(0, 1, 0);
         Vektor3D temptwo = new Vektor3D(birdy.getVelocity());
         try {
             temptwo.mult(0, 1, 1);
             rotation.x = LineareAlgebra.angleDegree(tempone, temptwo);
-            tempone.setPosition(1, 0, 0);
+            tempone.setPosition(0, 0, 1);
             temptwo.setPosition(birdy.getVelocity());
             temptwo.mult(1, 0, 1);
             rotation.y = LineareAlgebra.angleDegree(tempone, temptwo);
@@ -166,10 +196,10 @@ public class SchwarmTest {
             equirotation.x = 180 - rotation.x;
             equirotation.y = 180 - rotation.y;
             equirotation.z = 180 - rotation.z;
-            if (temptwo.y < 0) {
+            if (temptwo.z < 0) {
                 rotation.x = 360 - rotation.x;
             }
-            if (temptwo.z < 0) {
+            if (temptwo.x < 0) {
                 rotation.y = 360 - rotation.y;
 
             }
@@ -177,9 +207,9 @@ public class SchwarmTest {
                 rotation.z = 360 -rotation.z;
 
             }
-            equirotation.x = rotation.x - 360;
-            equirotation.y = rotation.y - 360;
-            equirotation.z = rotation.z - 360;
+//            equirotation.x = rotation.x - 360;
+//            equirotation.y = rotation.y - 360;
+//            equirotation.z = rotation.z - 360;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,8 +259,10 @@ public class SchwarmTest {
     public static Flock initschwarm() {
         Flock schwarm = new Flock();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 2; i++)
             schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
+        for (int i = 0;i<50;i++)
+            schwarm.addBird(new Bird(new Vektor3D(1,1,1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 10))));
 
         return schwarm;
 
