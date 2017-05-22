@@ -47,7 +47,7 @@ public class SchwarmTest {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         GLU.gluPerspective(
-                45.0f,
+                100.0f,
                 (float) Display.getWidth() / (float) Display.getHeight(),
                 0.1f,
                 100.0f);
@@ -120,7 +120,9 @@ public class SchwarmTest {
                 }
 
                 if (birdy.getClass() == Bird.class) {
-                    glTranslated((birdy.getPosition().x) / 100, (birdy.getPosition().y) / 100, ((birdy.getPosition().z) / 100) - 40);
+                    //glRotated(45, 1.0, 0.0, 1.0);
+                    glTranslated(-2,-2,-10);
+                    glTranslated((birdy.getPosition().x) / 100, (birdy.getPosition().y) / 100, ((birdy.getPosition().z) / 100));
                     //glRotated(90,0,0,1);
                    // glRotated(birdy.rotation.x, 1.0, 0.0, 0.0);
                    // glRotated(birdy.rotation.y, 0.0, 1.0, 0.0);
@@ -147,7 +149,7 @@ public class SchwarmTest {
             }
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -245,7 +247,7 @@ public class SchwarmTest {
 
     private static void initDisplay() {
         try {
-            Display.setDisplayMode(new DisplayMode(1000, 1000));
+            Display.setDisplayMode(new DisplayMode(2000, 2000));
             Display.setTitle("test");
             Display.create();
         } catch (LWJGLException e) {
@@ -259,10 +261,10 @@ public class SchwarmTest {
     public static Flock initschwarm() {
         Flock schwarm = new Flock();
 
-        for (int i = 0; i < 2; i++)
-            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
+//        for (int i = 0; i < 2; i++)
+//            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
         for (int i = 0;i<50;i++)
-            schwarm.addBird(new Bird(new Vektor3D(1,1,1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 10))));
+            schwarm.addBird(new Bird(new Vektor3D((Math.random() * 1), (Math.random() * 1), (Math.random() * 1)), new Vektor3D((Math.random() * 1000), (Math.random() * 1000), (Math.random() * 300))));
 
         return schwarm;
 
