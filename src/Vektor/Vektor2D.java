@@ -48,25 +48,6 @@ public class Vektor2D {
             throw new Exception("Emotionally Overflow");
         }
 
-//        if (x < 0 && this.x < 0) {
-//            if ((-Double.MAX_VALUE - x) > this.x) {
-//                throw new Exception("Out of Negative x Range");
-//            }
-//        } else if (x > 0 && this.x > 0) {
-//            if ((Double.MAX_VALUE - x) < this.x) {
-//                throw new Exception("Out of Positive x Range");
-//            }
-//        } else if (y < 0 && this.y < 0) {
-//            if ((-Double.MAX_VALUE - y) > this.y) {
-//                throw new Exception("Out of Negative y Range");
-//            }
-//        } else if (y > 0 && this.y > 0) {
-//            if ((Double.MAX_VALUE - y) < this.y) {
-//                throw new Exception("Out of Positive y Range");
-//            }
-//        }
-
-
         this.x = ex;
         this.y = ey;
 
@@ -97,15 +78,6 @@ public class Vektor2D {
         if (((ex == Double.POSITIVE_INFINITY) || (ex == Double.NEGATIVE_INFINITY)) || ((ey == Double.POSITIVE_INFINITY) || (ey == Double.NEGATIVE_INFINITY))){
             throw new Exception("Emotionally Overflow");
         }
-
-//        if (x > 0 && x < Double.MAX_VALUE / this.x ||
-//                x < 0 && x > Double.MAX_VALUE / this.x) {
-//            throw new Exception("out of x range");
-//        }
-//        if (y > 0 && y < Double.MAX_VALUE / this.y ||
-//                y < 0 && y > Double.MAX_VALUE / this.y) {
-//            throw new Exception("out of y range");
-//        }
         this.x = ex;
         this.y = ey;
     }
@@ -143,7 +115,7 @@ public class Vektor2D {
         }
     }
 
-    public boolean isNullFector() {
+    public boolean isNullVector() {
         if (this.x == 0 && this.y == 0) {
             return true;
         } else {

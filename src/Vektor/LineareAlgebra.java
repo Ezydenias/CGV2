@@ -201,12 +201,6 @@ public class LineareAlgebra {
         m = Math.abs(m);
         j = Math.abs(j);
         k = Math.abs(k);
-//        m*=m;
-//        j*=j;
-//        k*=k;
-//        m=Math.sqrt(m);
-//        j=Math.sqrt(j);
-//        k=Math.sqrt(k);
         result = m + j + k;
         return result;
     }
@@ -217,10 +211,6 @@ public class LineareAlgebra {
         j = a.y - b.y;
         m = Math.abs(m);
         j = Math.abs(j);
-//        m*=m;
-//        j*=j;
-//        m=Math.sqrt(m);
-//        j=Math.sqrt(j);
         result = m + j;
 
         return result;
@@ -245,7 +235,7 @@ public class LineareAlgebra {
     }
 
     public static double cosEquation(Vektor3D a, Vektor3D b) throws Exception {
-        if(a.isNullFector()||b.isNullFector()){
+        if(a.isNullVector()||b.isNullVector()){
             throw new Exception("no Angle to Null Vektor Defined");
         }
         double atemp, btemp, abtemp;
@@ -256,7 +246,7 @@ public class LineareAlgebra {
     }
 
     public static double cosEquation(Vektor2D a, Vektor2D b) throws Exception {
-        if(a.isNullFector()||b.isNullFector()){
+        if(a.isNullVector()||b.isNullVector()){
             throw new Exception("no Angle to Null Vektor Defined");
         }
         double atemp, btemp, abtemp;
@@ -277,7 +267,7 @@ public class LineareAlgebra {
     }
 
     public static double sinEquation(Vektor3D a, Vektor3D b) throws Exception {
-        if(a.isNullFector()||b.isNullFector()){
+        if(a.isNullVector()||b.isNullVector()){
             throw new Exception("no Angle to Null Vektor Defined");
         }
         double atemp, btemp, abtemp;
@@ -318,7 +308,6 @@ public class LineareAlgebra {
     public static double determinante(Vektor3D a, Vektor3D b, Vektor3D c) {
         return ((a.x*b.y*c.z+b.x*c.y*a.z+c.x*a.y*b.z)-(c.x*b.y*a.z+a.x*c.y*b.z+b.x*a.y*c.z));
     }
-
     public static double abs(double a) {
         if (a<0){
             return -a;

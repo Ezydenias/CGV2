@@ -7,8 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import Vektor.*;
-import org.omg.IOP.ExceptionDetailMessage;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 
 public class TestsVektor2D {
@@ -30,7 +28,7 @@ public class TestsVektor2D {
     }
 
     @Test
-    public void testinfinityinitialized(){
+    public void testInfinityInitialized(){
         Vektor2D a = new Vektor2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
         Vektor2D b = new Vektor2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
         Vektor2D c = new Vektor2D(3.0,Double.NEGATIVE_INFINITY);
@@ -44,7 +42,6 @@ public class TestsVektor2D {
         assertEquals(0.0,c.y,0.0);
         assertEquals(0.0,d.x,0.0);
         assertEquals(0.0,d.y,0.0);
-
     }
 
 
@@ -120,7 +117,7 @@ public class TestsVektor2D {
 
 
     @Test
-    public void addFunktion() {
+    public void addFunction() {
         try {
             Vektor2D a = new Vektor2D();
             a.setPosition(1, 1);
@@ -150,7 +147,7 @@ public class TestsVektor2D {
 
     //Sub Tests
     @Test
-    public void subKonsistens() {
+    public void subConsistency() {
         try {
             Vektor2D a = new Vektor2D();
             a.setPosition(2.0, 2.0);
@@ -245,7 +242,7 @@ public class TestsVektor2D {
 
 
     @Test
-    public void subFunktion() {
+    public void subFunction() {
 
         Vektor2D a = new Vektor2D();
         a.setPosition(2, 2);
@@ -298,7 +295,7 @@ public class TestsVektor2D {
     }
 
     @Test(expected = Exception.class)
-    public void multOverflowMaxNegativeRight() throws Exception {
+    public void multOverflowMaxRightNegative() throws Exception {
         Vektor2D a = new Vektor2D(-Double.MAX_VALUE, -Double.MAX_VALUE);
         a.mult(-Double.MAX_VALUE, 1);
     }
@@ -421,7 +418,7 @@ public class TestsVektor2D {
     }
 
     //div
-    //negate all exotected exceptions
+    //negate all expected exceptions
     @Test
     public void divOverflow() {
         try {
@@ -468,12 +465,12 @@ public class TestsVektor2D {
     }
 
     @Test(expected = Exception.class)
-    public void divOverflowMaxright() throws Exception {
+    public void divOverflowMaxRight() throws Exception {
         Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
         a.div(1, Double.MIN_VALUE);
     }
     @Test(expected = Exception.class)
-    public void divOverflowMaxleft() throws Exception {
+    public void divOverflowMaxLeft() throws Exception {
         Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
         a.div(Double.MIN_VALUE, 1);
     }
@@ -508,7 +505,7 @@ public class TestsVektor2D {
 
 
     @Test
-    public void DivFunction() {
+    public void divFunction() {
         Vektor2D a = new Vektor2D();
         a.setPosition(4, 4);
 
@@ -524,7 +521,7 @@ public class TestsVektor2D {
     }
 
     @Test
-    public void DivFunctionLeft() {
+    public void divFunctionLeft() {
         Vektor2D a = new Vektor2D();
         a.setPosition(4, 4);
 
@@ -540,7 +537,7 @@ public class TestsVektor2D {
     }
 
     @Test
-    public void DivFunctionRight() {
+    public void divFunctionRight() {
         Vektor2D a = new Vektor2D();
         a.setPosition(4, 4);
 
@@ -556,7 +553,7 @@ public class TestsVektor2D {
     }
 
     @Test
-    public void DivFunctionBoth() {
+    public void divFunctionBoth() {
         Vektor2D a = new Vektor2D();
         a.setPosition(4, 4);
 
@@ -653,12 +650,12 @@ public class TestsVektor2D {
         Vektor2D b = new Vektor2D(-2, -2);
         Vektor2D c = new Vektor2D(0, 0);
 
-        assertFalse(a.isNullFector());
-        assertFalse(b.isNullFector());
-        assertTrue(c.isNullFector());
-        assertFalse(a.isNullFector());
-        assertFalse(b.isNullFector());
-        assertTrue(c.isNullFector());
+        assertFalse(a.isNullVector());
+        assertFalse(b.isNullVector());
+        assertTrue(c.isNullVector());
+        assertFalse(a.isNullVector());
+        assertFalse(b.isNullVector());
+        assertTrue(c.isNullVector());
     }
 
     //Normalize
