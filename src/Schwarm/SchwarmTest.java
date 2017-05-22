@@ -55,40 +55,16 @@ public class SchwarmTest {
         glMatrixMode(GL_MODELVIEW);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-//ashsdjhkjksdjksd
-//        glShadeModel(GL_SMOOTH);
-//        glClearDepth(1.0);
-//        glEnable(GL_DEPTH_TEST);
-//        glEnable(GL_DEPTH_TEST);
-//        glDepthFunc(GL_LEQUAL);
-//        glLoadIdentity();
-//        glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-//
-//        glFrustum(-1, 1, -1, 1, 3, 100);
-//
-//        glMatrixMode(GL_PROJECTION);
-//       // glLoadIdentity(); // Resets any previous projection matrices
-//        glOrtho(0, 1280, 1024, 0, 100, -100);
-//        //glViewport(0,0,1280,1024);
-//        glMatrixMode(GL_MODELVIEW);
-//        glClearColor(0, 0, 256, 0);
-//        //glDisable(GL_DEPTH_TEST);
-//        //glDisable(GL_TEXTURE_2D );
+
     }
 
     private static void gameloop(Flock schwarm) {
         glTranslatef(0f, 0.0f, -20f);
 
-        //glScalef(4, 4, 4);
         while (!Display.isCloseRequested()) {
-            //glDrawBuffer(0);
+
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            //glLoadIdentity();
-            //glTranslatef(0f,0.0f,-0.7f);
-//            glRotatef(0.5f, 20.0f, 20.0f, 20.0f);
-//            glColor3f(0.5f, 0.5f, 1.0f);
-//            glBegin(GL_QUADS);
-//            {
+
 
 
 
