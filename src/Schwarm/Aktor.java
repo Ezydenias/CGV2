@@ -13,7 +13,7 @@ public abstract class Aktor {
     protected Vektor3D velocity;
     protected Vektor3D position;
     public Vektor3D rotation;
-    protected double maxSpeed;
+    protected double Speed;
     public int number;
     boolean alive;
 

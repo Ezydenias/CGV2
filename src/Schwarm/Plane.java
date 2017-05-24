@@ -20,6 +20,8 @@ public class Plane extends ManMadeObjects{
     public boolean isevading;
     public double effectiverange;
     public double evadingrange;
+    public Vektor3D fiedlsizemax;
+    public Vektor3D fiedlsizemin;
 
 
     private boolean isAlive;
@@ -30,6 +32,8 @@ public class Plane extends ManMadeObjects{
         this.isdodging=false;
         this.isevading=false;
         this.isAlive=true;
+        this.fiedlsizemax = new Vektor3D(500, 500, 1000);
+        this.fiedlsizemin = new Vektor3D(-500, -500, -500);
         effectiverange=200;
         evadingrange=50;
     }
@@ -52,12 +56,26 @@ public class Plane extends ManMadeObjects{
             System.out.print("tempvelocity"+tempvelocity.x+" "+tempvelocity.y+" "+tempvelocity.z);
             velocity.add(tempvelocity);
 
-            velocity.x=velocity.x/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
-            velocity.y=velocity.y/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
-            velocity.z=velocity.z/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
-
             this.position.add(velocity);
             System.out.print(number);
+
+            if (this.position.z > 500) {
+                this.velocity.z = 0;
+            } else if (this.position.z < 10) {
+                this.velocity.z = 0;
+            }
+
+            if (this.position.z > 400) {
+                this.velocity.z -= (0.000001 * this.position.z);
+            } else if (this.position.z < 20) {
+                this.velocity.z += (0.002 / this.position.z);
+            }
+
+//            velocity.x=velocity.x/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
+//            velocity.y=velocity.y/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
+//            velocity.z=velocity.z/(Math.abs(velocity.x)+Math.abs(velocity.y)+Math.abs(velocity.z));
+
+            velocity.normalize();
 
             this.isdodging=false;
             this.isevading=false;
@@ -202,6 +220,15 @@ public class Plane extends ManMadeObjects{
         } catch (Exception e){
             System.out.println("some problemo");
         }
+    }
+
+    void borders() {
+        if (position.x < this.fiedlsizemin.x) position.x = this.fiedlsizemax.x;
+        if (position.y < this.fiedlsizemin.y) position.y = this.fiedlsizemax.y;
+
+        if (position.x > this.fiedlsizemax.x) position.x = this.fiedlsizemin.x;
+        if (position.y > this.fiedlsizemax.y) position.y = this.fiedlsizemin.y;
+
     }
 
 

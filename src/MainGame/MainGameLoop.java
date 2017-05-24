@@ -6,6 +6,7 @@ import Entities.Light;
 import Schwarm.Aktor;
 import Schwarm.Bird;
 import Schwarm.Flock;
+import Schwarm.Plane;
 import Vektor.LineareAlgebra;
 import Vektor.Vektor3D;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -33,7 +34,8 @@ public class MainGameLoop {
         Loader loader = new Loader();
         MasterRenderer renderer = new MasterRenderer();
         List<Entity> allBirds= new ArrayList<Entity>();
-        Flock schwarm = new Flock();
+        List<Entity> allPlanes=new ArrayList<Entity>();
+        final Flock schwarm = new Flock();
 
 
         double[] vertices = {
@@ -92,23 +94,45 @@ public class MainGameLoop {
 
 //        for (int i = 0; i < 2; i++)
 //            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
-        for (int i = 0;i<50;i++) {
-            schwarm.addBird(new Bird(new Vektor3D((Math.random() * 1), (Math.random() * 1), (Math.random() * 1)), new Vektor3D((Math.random() * 10), (Math.random() * 10), -(Math.random() * 30))));
-
+        for (int i = 0;i<300;i++) {
+            schwarm.addBird(new Bird(new Vektor3D((Math.random() * 300)-150, (Math.random() * 300)-150, (Math.random() * 300)-150), new Vektor3D((Math.random() * 300)-150, (Math.random() * 300)-150, -(Math.random() * 100)-50)));
+        }
+        for (int i = 0;i<5;i++){
+            schwarm.addBird(new Plane(new Vektor3D((Math.random() * 1), (Math.random() * 1), (Math.random() * 1)), new Vektor3D((Math.random() * 400)-200, (Math.random() * 400)-200, (Math.random() * 300)-150)));
         }
 
         for (Aktor birdy : schwarm.Aktor) {
             if (birdy.getClass() == Bird.class) {
-                allBirds.add(new Entity(barnModel,birdy.getPosition(),birdy.rotation,0.1));
+                allBirds.add(new Entity(barnModel,birdy.getPosition(),birdy.rotation,1));
             }
         }
 
+        for (Aktor plany:schwarm.Aktor){
+            if(plany.getClass()==Plane.class){
+                allBirds.add(new Entity(dragonModel,plany.getPosition(),plany.rotation,1));
+            }
+        }
 
         Camera camera = new Camera();
 
 
+        Thread schwarmthread = new Thread(new Runnable() {
+            public void run() {
+                while(!Display.isCloseRequested()) {
+                    schwarm.run();
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        schwarmthread.start();
 
 
+        //schwarmthread.run();
 
         while(!Display.isCloseRequested()){
 
@@ -118,13 +142,26 @@ public class MainGameLoop {
             dragonEntity.increaseRotation(0,1,0);
             camera.move();
 
-            schwarm.run();
+            //schwarm.run();
 
 
-            int i =0;
+            int i = 0;
 
             for (Aktor birdy : schwarm.Aktor) {
                 if (birdy.getClass() == Bird.class) {
+                    try {
+                        allBirds.get(i).setPosition(birdy.getPosition());
+                    } catch (IndexOutOfBoundsException e){
+                        System.out.println("doesn't exist");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                i++;
+            }
+
+            for (Aktor birdy : schwarm.Aktor) {
+                if (birdy.getClass() == Plane.class) {
                     try {
                         allBirds.get(i).setPosition(birdy.getPosition());
                     } catch (IndexOutOfBoundsException e){

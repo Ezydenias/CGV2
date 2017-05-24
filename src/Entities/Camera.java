@@ -9,8 +9,8 @@ import org.lwjgl.input.Keyboard;
 
 public class Camera {
 
-    private Vektor3D position = new Vektor3D();
-    private Vektor3D rotation = new Vektor3D();
+    private Vektor3D position = new Vektor3D(0,300,500);
+    private Vektor3D rotation = new Vektor3D(30,0,0);
 
     public Camera() {
     }

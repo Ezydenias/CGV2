@@ -138,4 +138,12 @@ public class Vektor3D {
         double n = length();
         div(n, n, n);
     }
+
+    public boolean isEqual(double x, double y, double z) {
+        if (this.x == x && this.y == y && this.z == z) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

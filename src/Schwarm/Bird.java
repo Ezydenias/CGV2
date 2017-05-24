@@ -4,36 +4,55 @@ import Vektor.LineareAlgebra;
 import Vektor.Vektor3D;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Ezydenias on 5/9/2017. dsfdssgfcmjkm,mfdfd
  */
+
 public class Bird extends Aktor {
 
     private boolean isAlive;        //die from everything
     protected Vektor3D tempvelocity;
+    private double scareDistance;
     private double sepDistance;
     private double alignDistance;
     private double cohDistance;
     public Vektor3D fiedlsizemax;
     public Vektor3D fiedlsizemin;
+    private double TopSpeed;
+    public boolean gottaGoFast;
+    public int dampning;
+    public int topSpeedDamning;
+    private int dampingTimer;
 
     public Bird(Vektor3D velocity, Vektor3D position) {
         super(velocity, position);
+        this.Speed=1;
+        this.TopSpeed=2;
+        this.dampning=2;
+        this.topSpeedDamning=10;
+        this.dampingTimer=this.dampning;
+        this.gottaGoFast=false;
         this.isAlive = true;
         this.tempvelocity = new Vektor3D();
-        this.sepDistance = 100;
-        this.alignDistance = 125;
-        this.cohDistance = 150;
-        this.fiedlsizemax = new Vektor3D(5000, 500, 500);
+        this.scareDistance=75;
+        this.sepDistance = 25;
+        this.alignDistance = 50;
+        this.cohDistance = 35;
+        this.fiedlsizemax = new Vektor3D(500, 500, 500);
         this.fiedlsizemin = new Vektor3D(-500, -500, -500);
     }
 
     public void act(ArrayList<Aktor> stuff) {
-        for (int i = 0; i < 2; i++)
+        dampingTimer--;
             update();
         this.tempvelocity.setPosition(0, 0, 0);
-        flock(stuff);
+        if(dampingTimer<=0) {
+            gottaGoFast=false;
+            flock(stuff);
+            dampingTimer=dampning;
+        }
     }
 
     private void flock(ArrayList<Aktor> stuff) {
@@ -45,9 +64,15 @@ public class Bird extends Aktor {
             sep.mult(3);
             ali.mult(1.0);
             coh.mult(1.0);
+
+            if(gottaGoFast){
+                sep.mult(10);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         // Add the force vectors to acceleration
         tempvelocity.setPosition(0, 0, 0);
@@ -57,9 +82,18 @@ public class Bird extends Aktor {
             tempvelocity.add(coh);
 
 
-
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(tempvelocity.isEqual(0,0,0)){
+            gottaGoFast=true;
+            dampingTimer=topSpeedDamning;
+            try {
+                tempvelocity.add(Math.random()*10-5,Math.random()*10-5,Math.random()*10-5);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
 
@@ -82,29 +116,37 @@ public class Bird extends Aktor {
     private void update() {
 
         try {
-            System.out.print("tempvelocity" + tempvelocity.x + " " + tempvelocity.y + " " + tempvelocity.z);
+           // System.out.print("tempvelocity" + tempvelocity.x + " " + tempvelocity.y + " " + tempvelocity.z);
             tempvelocity.div(5);
             velocity.add(tempvelocity);
 
-            if(this.position.z>300){
-                this.velocity.z=0;
-            } else if (this.position.z<20){
-                this.velocity.z=0;
+            if (this.position.z > 300) {
+                this.velocity.z = 0;
+            } else if (this.position.z < 20) {
+                this.velocity.z = 0;
             }
 
-            if(this.position.z>180){
-                this.velocity.z-=(0.000001*this.position.z);
-            }else if (this.position.z<80){
-                this.velocity.z+=(0.002/this.position.z);
+            if (this.position.z > 180) {
+                this.velocity.z -= (0.000001 * this.position.z);
+            } else if (this.position.z < 80) {
+                this.velocity.z += (0.002 / this.position.z);
             }
 
-            velocity.x = velocity.x / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
-            velocity.y = velocity.y / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
-            velocity.z = velocity.z / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
+            velocity.normalize();
 
+//            velocity.x = velocity.x / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
+//            velocity.y = velocity.y / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
+//            velocity.z = velocity.z / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
+
+            if(gottaGoFast){
+
+                velocity.mult(TopSpeed);
+            }else {
+                velocity.mult(Speed);
+            }
 
             this.position.add(velocity);
-            System.out.print(number);
+            //System.out.print(number);
 
             LineareAlgebra.show(this.getPosition());
 
@@ -137,52 +179,60 @@ public class Bird extends Aktor {
 
                 double distance = LineareAlgebra.euklDistance(other.getPosition(), this.getPosition());
                 if (other != this) {
-                    if (distance < sepDistance) {
-                        count++;
 
 
-                        tempInLine = LineareAlgebra.sub(other.getPosition(), this.getPosition());
-                        tempInLine.x = Math.round(tempInLine.x);
-                        tempInLine.y = Math.round(tempInLine.y);
-                        tempInLine.z = Math.round(tempInLine.z);
-                        if ((x = Math.round(this.velocity.x)) == 0)
-                            x = 1;
-                        if ((y = Math.round(this.velocity.y)) == 0)
-                            y = 1;
-                        if ((z = Math.round(this.velocity.z)) == 0)
-                            z = 1;
-                        tempInLine.div(x, y, z);
+                        if (distance < sepDistance) {
+                            count++;
 
-                        distance = 0.02 / distance;
-                        if (distance < sepDistance/5)distance*=5;
 
-                        if (tempInLine.x > this.position.x) {
-                            steer.add(-distance, 0, 0);
-                            //this.velocity.normalize();
-                        } else if (tempInLine.x < this.position.x) {
-                            steer.add(distance, 0, 0);
-                            //this.velocity.normalize();
+                            tempInLine = LineareAlgebra.sub(other.getPosition(), this.getPosition());
+                            tempInLine.x = Math.round(tempInLine.x);
+                            tempInLine.y = Math.round(tempInLine.y);
+                            tempInLine.z = Math.round(tempInLine.z);
+                            if ((x = Math.round(this.velocity.x)) == 0)
+                                x = 1;
+                            if ((y = Math.round(this.velocity.y)) == 0)
+                                y = 1;
+                            if ((z = Math.round(this.velocity.z)) == 0)
+                                z = 1;
+                            tempInLine.div(x, y, z);
+
+
+
+
+                                distance = 0.02 / distance;
+                                if (distance < sepDistance / 5) distance *= 5;
+
+
+                            if (tempInLine.x > this.position.x) {
+                                steer.add(-distance, 0, 0);
+                                //this.velocity.normalize();
+                            } else if (tempInLine.x < this.position.x) {
+                                steer.add(distance, 0, 0);
+                                //this.velocity.normalize();
+                            }
+
+                            if (tempInLine.y > this.position.y) {
+                                steer.add(0, -distance, 0);
+                                //this.velocity.normalize();
+                            } else if (tempInLine.y < this.position.y) {
+                                steer.add(0, distance, 0);
+                                //this.velocity.normalize();
+                            }
+
+                            if (tempInLine.z > this.position.z) {
+                                steer.add(0, 0, -distance);
+                                //this.velocity.normalize();
+                            } else if (tempInLine.z < this.position.z) {
+                                steer.add(0, 0, distance);
+                                //this.velocity.normalize();
+                            }
+
+
                         }
 
-                        if (tempInLine.y > this.position.y) {
-                            steer.add(0, -distance, 0);
-                            //this.velocity.normalize();
-                        } else if (tempInLine.y < this.position.y) {
-                            steer.add(0, distance, 0);
-                            //this.velocity.normalize();
-                        }
+                        //keep track of how many
 
-                        if (tempInLine.z > this.position.z) {
-                            steer.add(0, 0, -distance);
-                            //this.velocity.normalize();
-                        } else if (tempInLine.z < this.position.z) {
-                            steer.add(0, 0, distance);
-                            //this.velocity.normalize();
-                        }
-
-
-                    }
-                    //keep track of how many
                 }
             }
 
@@ -329,5 +379,29 @@ public class Bird extends Aktor {
 
     public void setCohDistance(double cohDistance) {
         this.cohDistance = cohDistance;
+    }
+
+    public double getTopSpeed() {
+        return TopSpeed;
+    }
+
+    public void setTopSpeed(double topSpeed) {
+        TopSpeed = topSpeed;
+    }
+
+    public double getSpeed() {
+        return Speed;
+    }
+
+    public void setSpeed(double Speed) {
+        this.Speed = Speed;
+    }
+
+    public double getScareDistance() {
+        return scareDistance;
+    }
+
+    public void setScareDistance(double scareDistance) {
+        this.scareDistance = scareDistance;
     }
 }
