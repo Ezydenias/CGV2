@@ -25,8 +25,8 @@ public class Bird extends Aktor {
         this.sepDistance = 100;
         this.alignDistance = 125;
         this.cohDistance = 150;
-        this.fiedlsizemax = new Vektor3D(1000, 1000, 0);
-        this.fiedlsizemin = new Vektor3D(-1000, -1000, -1000);
+        this.fiedlsizemax = new Vektor3D(5000, 500, 500);
+        this.fiedlsizemin = new Vektor3D(-500, -500, -500);
     }
 
     public void act(ArrayList<Aktor> stuff) {

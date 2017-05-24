@@ -237,8 +237,8 @@ public class SchwarmTest {
     public static Flock initschwarm() {
         Flock schwarm = new Flock();
 
-//        for (int i = 0; i < 2; i++)
-//            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
+        for (int i = 0; i < 5; i++)
+            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
         for (int i = 0;i<50;i++)
             schwarm.addBird(new Bird(new Vektor3D((Math.random() * 1), (Math.random() * 1), (Math.random() * 1)), new Vektor3D((Math.random() * 1000), (Math.random() * 1000), (Math.random() * 300))));
 

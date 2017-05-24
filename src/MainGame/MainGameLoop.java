@@ -3,17 +3,23 @@ package MainGame;
 import Entities.Camera;
 import Entities.Entity;
 import Entities.Light;
+import Schwarm.Aktor;
+import Schwarm.Bird;
+import Schwarm.Flock;
+import Vektor.LineareAlgebra;
 import Vektor.Vektor3D;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
-import renderEngine.DisplayManager;
-import renderEngine.Loader;
+import renderEngine.*;
 import models.RawModel;
-import renderEngine.OBJLoader;
-import renderEngine.Renderer;
 import shaders.StaticShader;
 import textures.ModelTexture;
+
+import javax.management.openmbean.ArrayType;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ezydenias on 5/22/2017.
@@ -25,8 +31,10 @@ public class MainGameLoop {
 
         DisplayManager.createDisplay();
         Loader loader = new Loader();
-        StaticShader shader = new StaticShader();
-        Renderer renderer= new Renderer(shader);
+        MasterRenderer renderer = new MasterRenderer();
+        List<Entity> allBirds= new ArrayList<Entity>();
+        Flock schwarm = new Flock();
+
 
         double[] vertices = {
                 -0.5,0.5,0,
@@ -48,11 +56,13 @@ public class MainGameLoop {
         };
 
         double[] normals = {
-                1,1,0,
-                1,1,0,
-                1,1,0,
-                1,1,0
+                -1,-1,0,
+                -1,-1,0,
+                -1,-1,0,
+                -1,-1,0
         };
+
+
 
 
         Light light = new Light(new Vektor3D(3,0,-20), new Vektor3D(1,1,1));
@@ -70,13 +80,35 @@ public class MainGameLoop {
         ModelTexture dragonTex = new ModelTexture(loader.loadTexture("white"));
         dragonTex.setShineDamper(20);
         dragonTex.setReflectivity(30);
+        dragonTex.setToon(70);
+        dragonTex.setOutlinecolor(0,0,0);
         TexturedModel dragonModel = new TexturedModel(dragon,dragonTex);
 
         Entity entity = new Entity(texturedModel,new Vektor3D(0,0,-3),0,0,0,1);
         Entity barnEntity = new Entity(barnModel,new Vektor3D(),0,0,0,1);
         Entity dragonEntity = new Entity(dragonModel,new Vektor3D(0,0,-15),0,0,0,1);
 
+
+
+//        for (int i = 0; i < 2; i++)
+//            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
+        for (int i = 0;i<50;i++) {
+            schwarm.addBird(new Bird(new Vektor3D((Math.random() * 1), (Math.random() * 1), (Math.random() * 1)), new Vektor3D((Math.random() * 10), (Math.random() * 10), -(Math.random() * 30))));
+
+        }
+
+        for (Aktor birdy : schwarm.Aktor) {
+            if (birdy.getClass() == Bird.class) {
+                allBirds.add(new Entity(barnModel,birdy.getPosition(),birdy.rotation,0.1));
+            }
+        }
+
+
         Camera camera = new Camera();
+
+
+
+
 
         while(!Display.isCloseRequested()){
 
@@ -85,20 +117,55 @@ public class MainGameLoop {
             barnEntity.increaseRotation(0,1,0);
             dragonEntity.increaseRotation(0,1,0);
             camera.move();
-            renderer.prepare();
-            shader.start();
-            shader.loadLight(light);
-            shader.loadLight(light2);
-            shader.loadViewMatrix(camera);
-            renderer.render(entity,shader);
-            renderer.render(dragonEntity,shader);
-            //renderer.render(barnEntity,shader);
-            shader.stop();
+
+            schwarm.run();
+
+
+            int i =0;
+
+            for (Aktor birdy : schwarm.Aktor) {
+                if (birdy.getClass() == Bird.class) {
+                    try {
+                        allBirds.get(i).setPosition(birdy.getPosition());
+                    } catch (IndexOutOfBoundsException e){
+                        System.out.println("doesn't exist");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                i++;
+            }
+
+
+            for (Entity bird : allBirds){
+
+
+                renderer.processEntity(bird);
+            }
+
+//            for (Aktor birdy : schwarm.Aktor) {
+//                if (birdy.getClass() == Bird.class) {
+//
+//                    renderer.processEntity(entity);
+//            }
+//
+//            }
+
+
+
+            renderer.processEntity(dragonEntity);
+
+            renderer.addLights(light2);
+
+            renderer.render(light,camera);
             DisplayManager.updateDisplay();
         }
 
-        shader.cleanUp();
+        renderer.cleanUp();
         loader.cleanUp();
         DisplayManager.closeDisplay();
     }
+
+
+
 }

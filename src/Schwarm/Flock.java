@@ -9,17 +9,17 @@ import java.util.ArrayList;
  */
 public class Flock {
 
-    ArrayList<Aktor> Aktor;
+    public ArrayList<Aktor> Aktor;
 
     public Flock() {
         Aktor = new ArrayList<Aktor>();
     }
 
-    void addBird(Aktor birdy) {
+    public void addBird(Aktor birdy) {
         Aktor.add(birdy);
     }
 
-    void run() {
+    public void run() {
         int i = 0;
         for (Aktor birdy : Aktor) {
             birdy.number=i;

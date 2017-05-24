@@ -23,6 +23,10 @@ public class Entity {
         this.scale = scale;
     }
 
+    public Entity(TexturedModel texturedModel, Vektor3D position, Vektor3D rotation, double scale) {
+        this(texturedModel,position,rotation.x,rotation.y,rotation.z,scale);
+    }
+
     public void increasePosition(double dx, double dy, double dz){
         try {
             this.position.add(dx,dy,dz);
@@ -96,4 +100,5 @@ public class Entity {
     public void setScale(double scale) {
         this.scale = scale;
     }
+
 }

@@ -676,6 +676,36 @@ public class TestsVektor2D {
         assertEquals(a.length(),1.0,0.1);
     }
 
+    @Test
+    public void normalizeResultLengthisOne(){
+        Vektor2D a = new Vektor2D(2,3);
+        double b = 0;
+        try {
+            a.normalize();
+            b=a.length();
+        } catch (Exception e) {
+        }
+
+        assertEquals(1.0,b,0.1);
+    }
+
+    @Test
+    public void normalizevVSequaldistribution(){
+        Vektor2D a = new Vektor2D(2,3);
+        double b =2+3;
+        double c = 1;
+        try {
+            a.div(b);
+            b=a.x+a.y;
+            c=a.length();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(1.0,b,0.1);
+        assertNotEquals(1.0,c,0.1);
+        System.out.println(c);
+    }
+
 
 
     //Length
