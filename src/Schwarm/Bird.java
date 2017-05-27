@@ -4,7 +4,6 @@ import Vektor.LineareAlgebra;
 import Vektor.Vektor3D;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Ezydenias on 5/9/2017. dsfdssgfcmjkm,mfdfd
@@ -28,15 +27,15 @@ public class Bird extends Aktor {
 
     public Bird(Vektor3D velocity, Vektor3D position) {
         super(velocity, position);
-        this.Speed=1;
-        this.TopSpeed=2;
-        this.dampning=2;
-        this.topSpeedDamning=10;
-        this.dampingTimer=this.dampning;
-        this.gottaGoFast=false;
+        this.Speed = 1;
+        this.TopSpeed = 2;
+        this.dampning = 2;
+        this.topSpeedDamning = 10;
+        this.dampingTimer = this.dampning;
+        this.gottaGoFast = false;
         this.isAlive = true;
         this.tempvelocity = new Vektor3D();
-        this.scareDistance=75;
+        this.scareDistance = 75;
         this.sepDistance = 25;
         this.alignDistance = 50;
         this.cohDistance = 35;
@@ -46,12 +45,12 @@ public class Bird extends Aktor {
 
     public void act(ArrayList<Aktor> stuff) {
         dampingTimer--;
-            update();
+        update();
         this.tempvelocity.setPosition(0, 0, 0);
-        if(dampingTimer<=0) {
-            gottaGoFast=false;
+        if (dampingTimer <= 0) {
+            gottaGoFast = false;
             flock(stuff);
-            dampingTimer=dampning;
+            dampingTimer = dampning;
         }
     }
 
@@ -65,7 +64,7 @@ public class Bird extends Aktor {
             ali.mult(1.0);
             coh.mult(1.0);
 
-            if(gottaGoFast){
+            if (gottaGoFast) {
                 sep.mult(10);
             }
 
@@ -85,11 +84,11 @@ public class Bird extends Aktor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(tempvelocity.isEqual(0,0,0)){
-            gottaGoFast=true;
-            dampingTimer=topSpeedDamning;
+        if (tempvelocity.isEqual(0, 0, 0)) {
+            gottaGoFast = true;
+            dampingTimer = topSpeedDamning;
             try {
-                tempvelocity.add(Math.random()*10-5,Math.random()*10-5,Math.random()*10-5);
+                tempvelocity.add(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -100,14 +99,14 @@ public class Bird extends Aktor {
     }
 
     public void act() {
-        if (isAlive != true) {
+        if (!isAlive) {
             return;
         }
 
     }
 
     public void reAnimate() {
-        if (isAlive != true) {
+        if (!isAlive) {
             isAlive = true;
             //set new position here
         }
@@ -116,7 +115,7 @@ public class Bird extends Aktor {
     private void update() {
 
         try {
-           // System.out.print("tempvelocity" + tempvelocity.x + " " + tempvelocity.y + " " + tempvelocity.z);
+            // System.out.print("tempvelocity" + tempvelocity.x + " " + tempvelocity.y + " " + tempvelocity.z);
             tempvelocity.div(5);
             velocity.add(tempvelocity);
 
@@ -138,10 +137,10 @@ public class Bird extends Aktor {
 //            velocity.y = velocity.y / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
 //            velocity.z = velocity.z / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
 
-            if(gottaGoFast){
+            if (gottaGoFast) {
 
                 velocity.mult(TopSpeed);
-            }else {
+            } else {
                 velocity.mult(Speed);
             }
 
@@ -180,10 +179,15 @@ public class Bird extends Aktor {
                 double distance = LineareAlgebra.euklDistance(other.getPosition(), this.getPosition());
                 if (other != this) {
 
-
+                    if (other instanceof Plane) {
+                        if (distance < scareDistance) {
+                            tempInLine = LineareAlgebra.sub(this.getPosition(), other.getPosition());
+                            steer.add(tempInLine.x, tempInLine.y, tempInLine.z);
+                            gottaGoFast = true;
+                        }
+                    } else if (other instanceof Bird) {
                         if (distance < sepDistance) {
                             count++;
-
 
                             tempInLine = LineareAlgebra.sub(other.getPosition(), this.getPosition());
                             tempInLine.x = Math.round(tempInLine.x);
@@ -198,10 +202,8 @@ public class Bird extends Aktor {
                             tempInLine.div(x, y, z);
 
 
-
-
-                                distance = 0.02 / distance;
-                                if (distance < sepDistance / 5) distance *= 5;
+                            distance = 0.02 / distance;
+                            if (distance < sepDistance / 5) distance *= 5;
 
 
                             if (tempInLine.x > this.position.x) {
@@ -231,7 +233,8 @@ public class Bird extends Aktor {
 
                         }
 
-                        //keep track of how many
+                    }
+                    //keep track of how many
 
                 }
             }

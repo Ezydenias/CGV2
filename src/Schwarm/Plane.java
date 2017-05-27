@@ -53,7 +53,7 @@ public class Plane extends ManMadeObjects{
     private void update() {
 
         try {
-            System.out.print("tempvelocity"+tempvelocity.x+" "+tempvelocity.y+" "+tempvelocity.z);
+            //System.out.print("tempvelocity"+tempvelocity.x+" "+tempvelocity.y+" "+tempvelocity.z);
             velocity.add(tempvelocity);
 
             this.position.add(velocity);
