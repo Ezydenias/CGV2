@@ -13,6 +13,7 @@ public class Entity {
     private Vektor3D position;
     private double rotX,rotY,rotZ;
     private double scale;
+    private int rotationMode = 1;
 
     public Entity(TexturedModel model, Vektor3D position, double rotX, double rotY, double rotZ, double scale) {
         this.model = model;
@@ -101,4 +102,11 @@ public class Entity {
         this.scale = scale;
     }
 
+    public int getRotationMode() {
+        return rotationMode;
+    }
+
+    public void setRotationMode(int mode){
+        rotationMode=mode;
+    }
 }
