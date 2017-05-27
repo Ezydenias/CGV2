@@ -94,10 +94,10 @@ public class MainGameLoop {
 
 //        for (int i = 0; i < 2; i++)
 //            schwarm.addBird(new Plane(new Vektor3D(1, 1, 1), new Vektor3D((Math.random() * 300), (Math.random() * 300), (Math.random() * 300))));
-        for (int i = 0;i<300;i++) {
+        for (int i = 0;i<700;i++) {
             schwarm.addBird(new Bird(new Vektor3D((Math.random() * 300)-150, (Math.random() * 300)-150, (Math.random() * 300)-150), new Vektor3D((Math.random() * 300)-150, (Math.random() * 300)-150, -(Math.random() * 100)-50)));
         }
-        for (int i = 0;i<5;i++){
+        for (int i = 0;i<0;i++){
             schwarm.addBird(new Plane(new Vektor3D((Math.random() * 1), (Math.random() * 1), (Math.random() * 1)), new Vektor3D((Math.random() * 400)-200, (Math.random() * 400)-200, (Math.random() * 300)-150)));
         }
 
@@ -200,6 +200,7 @@ public class MainGameLoop {
 
         renderer.cleanUp();
         loader.cleanUp();
+        schwarmthread.stop();
         DisplayManager.closeDisplay();
     }
 
