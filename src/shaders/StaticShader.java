@@ -10,6 +10,7 @@ import toolbox.Maths;
 /**
  * Created by Ezydenias on 5/22/2017.
  */
+
 public class StaticShader extends ShaderProgram {
 
     private static final String VERTEX_FILE = "src/shaders/vertexShader.glsl";
