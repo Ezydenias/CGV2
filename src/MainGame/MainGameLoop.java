@@ -78,6 +78,14 @@ public class MainGameLoop {
         ModelTexture barnTex = new ModelTexture(loader.loadTexture("stallTexture"));
         TexturedModel barnModel = new TexturedModel(barn, barnTex);
 
+        RawModel bird = OBJLoader.loadObjModel("bird",loader);
+        ModelTexture birdTex = new ModelTexture(loader.loadTexture("white"));
+        birdTex.setShineDamper(20);
+        birdTex.setReflectivity(30);
+        birdTex.setToon(70);
+        birdTex.setOutlinecolor(0, 0, 0);
+        TexturedModel birdModel = new TexturedModel(bird,birdTex);
+
         RawModel dragon = OBJLoader.loadObjModel("dragon", loader);
         ModelTexture dragonTex = new ModelTexture(loader.loadTexture("white"));
         dragonTex.setShineDamper(20);
@@ -102,7 +110,7 @@ public class MainGameLoop {
 
         for (Aktor birdy : schwarm.Aktor) {
             if (birdy.getClass() == Bird.class) {
-                allBirds.add(new Entity(barnModel, birdy.getPosition(), birdy.rotation, 1));
+                allBirds.add(new Entity(birdModel, birdy.getPosition(), birdy.rotation, 1));
             }
         }
 
@@ -173,10 +181,10 @@ public class MainGameLoop {
             }
 
 
-            for (Entity bird : allBirds) {
+            for (Entity birds : allBirds) {
 
 
-                renderer.processEntity(bird);
+                renderer.processEntity(birds);
             }
 
 //            for (Aktor birdy : schwarm.Aktor) {

@@ -1,12 +1,14 @@
 #version 400 core
 
-in vec3 otherPosition;
-in vec3 otherVelocity;
-in vec3 ownPosition;
-in vec3 ownVelocity;
 
 out vec3 out_Steer;
 
+
+
+uniform vec3 otherPosition;
+uniform vec3 otherVelocity;
+uniform vec3 ownVelocity;
+uniform vec3 ownPosition;
 uniform float cohDistance;
 uniform float sepDistance;
 uniform float aliDistance;
@@ -36,9 +38,9 @@ void main(void){
         //aliVec = mult(aliVec,1);
         //cohVec = mult(cohVec,1);
 
-        newVelocity=add(newVelocity,sepVec);
-        newVelocity=add(newVelocity,aliVec);
-        newVelocity=add(newVelocity,cohVec);
+        newVelocity=newVelocity + sepVec;
+        newVelocity=newVelocity + aliVec;
+        newVelocity=newVelocity + cohVec;
 
         out_Steer=newVelocity;
     }

@@ -1,5 +1,7 @@
 package shaders;
 
+import Vektor.Vektor3D;
+
 /**
  * Created by Ezydenias on 5/29/2017.
  */
@@ -12,6 +14,10 @@ public class GPUBirdCalcShader extends ShaderProgram {
     private int location_cohDistance;
     private int location_sepDistance;
     private int location_aliDistance;
+    private int location_otherPosition;
+    private int location_otherVelocity;
+    private int location_ownPosition;
+    private int location_ownVelocity;
 
     public GPUBirdCalcShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -22,6 +28,11 @@ public class GPUBirdCalcShader extends ShaderProgram {
         location_cohDistance = super.getUniformLocation("cohDistance");
         location_sepDistance = super.getUniformLocation("sepDistance");
         location_aliDistance = super.getUniformLocation("aliDistance");
+
+        location_otherPosition = super.getUniformLocation("otherPosition");
+        location_otherVelocity = super.getUniformLocation("otherVelocity");
+        location_ownPosition = super.getUniformLocation("ownPosition");
+        location_ownVelocity = super.getUniformLocation("ownVelocity");
     }
 
     public void loadUniforms(double cohDistance, double sepDistance, double aliDistance) {
@@ -30,12 +41,19 @@ public class GPUBirdCalcShader extends ShaderProgram {
         super.loadDouble(location_sepDistance, sepDistance);
     }
 
+    public void loadVektors(Vektor3D otherPosition, Vektor3D otherVelocity, Vektor3D ownPosition, Vektor3D ownVelocity) {
+        super.loadVector(location_otherPosition, otherPosition);
+        super.loadVector(location_otherVelocity, otherVelocity);
+        super.loadVector(location_ownPosition, ownPosition);
+        super.loadVector(location_ownVelocity, ownVelocity);
+    }
+
     @Override
     protected void bindAttributes() {
-        super.bindAttribute(0, "otherPosition");
-        super.bindAttribute(1, "otherVelocity");
-        super.bindAttribute(2, "ownPosition");
-        super.bindAttribute(3, "ownVelocity");
+//        super.bindAttribute(0, "otherPosition");
+//        super.bindAttribute(1, "otherVelocity");
+//        super.bindAttribute(2, "ownPosition");
+//        super.bindAttribute(3, "ownVelocity");
     }
 
 }
