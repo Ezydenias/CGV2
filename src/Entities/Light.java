@@ -5,6 +5,7 @@ import Vektor.Vektor3D;
 /**
  * Created by Ezydenias on 5/23/2017.
  */
+
 public class Light {
 
     private Vektor3D position;

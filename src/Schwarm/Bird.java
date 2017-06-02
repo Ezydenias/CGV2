@@ -58,20 +58,18 @@ public class Bird extends Aktor {
         Vektor3D sep = new Vektor3D(separate(stuff));   // Separation
         Vektor3D ali = new Vektor3D(align(stuff));      // Alignment
         Vektor3D coh = new Vektor3D(cohesion(stuff));   // Cohesion
+
         // Arbitrarily weight these forces
         try {
             sep.mult(3);
             ali.mult(1.0);
             coh.mult(1.0);
-
             if (gottaGoFast) {
                 sep.mult(10);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         // Add the force vectors to acceleration
         tempvelocity.setPosition(0, 0, 0);
@@ -79,8 +77,6 @@ public class Bird extends Aktor {
             tempvelocity.add(sep);
             tempvelocity.add(ali);
             tempvelocity.add(coh);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,17 +88,13 @@ public class Bird extends Aktor {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-
-
     }
 
     public void act() {
         if (!isAlive) {
             return;
         }
-
     }
 
     public void reAnimate() {
@@ -134,10 +126,6 @@ public class Bird extends Aktor {
 
             velocity.normalize();
 
-//            velocity.x = velocity.x / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
-//            velocity.y = velocity.y / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
-//            velocity.z = velocity.z / (Math.abs(velocity.x) + Math.abs(velocity.y) + Math.abs(velocity.z));
-
             if (gottaGoFast) {
 
                 velocity.mult(TopSpeed);
@@ -146,9 +134,6 @@ public class Bird extends Aktor {
             }
 
             this.position.add(velocity);
-            //System.out.print(number);
-
-            LineareAlgebra.show(this.getPosition());
 
             borders();
             setRotation();
@@ -164,7 +149,6 @@ public class Bird extends Aktor {
 
         if (position.x > this.fiedlsizemax.x) position.x = this.fiedlsizemin.x;
         if (position.y > this.fiedlsizemax.y) position.y = this.fiedlsizemin.y;
-
     }
 
     // Method checks for nearby stuff and steers away
@@ -177,10 +161,8 @@ public class Bird extends Aktor {
         Vektor3D tempInLine = new Vektor3D();
         try {
             for (Aktor other : stuff) {
-
                 double distance = LineareAlgebra.euklDistance(other.getPosition(), this.getPosition());
                 if (other != this) {
-
                     if (other instanceof Plane) {
                         if (distance < scareDistance) {
                             tempInLine = LineareAlgebra.sub(this.getPosition(), other.getPosition());
@@ -190,7 +172,6 @@ public class Bird extends Aktor {
                     } else if (other instanceof Bird) {
                         if (distance < sepDistance) {
                             count++;
-
                             tempInLine = LineareAlgebra.sub(other.getPosition(), this.getPosition());
                             tempInLine.x = Math.round(tempInLine.x);
                             tempInLine.y = Math.round(tempInLine.y);
@@ -202,46 +183,27 @@ public class Bird extends Aktor {
                             if ((z = Math.round(this.velocity.z)) == 0)
                                 z = 1;
                             tempInLine.div(x, y, z);
-
-
                             distance = 0.02 / distance;
                             if (distance < sepDistance / 5) distance *= 5;
-
-
                             if (tempInLine.x > this.position.x) {
                                 steer.add(-distance, 0, 0);
-                                //this.velocity.normalize();
                             } else if (tempInLine.x < this.position.x) {
                                 steer.add(distance, 0, 0);
-                                //this.velocity.normalize();
                             }
-
                             if (tempInLine.y > this.position.y) {
                                 steer.add(0, -distance, 0);
-                                //this.velocity.normalize();
                             } else if (tempInLine.y < this.position.y) {
                                 steer.add(0, distance, 0);
-                                //this.velocity.normalize();
                             }
-
                             if (tempInLine.z > this.position.z) {
                                 steer.add(0, 0, -distance);
-                                //this.velocity.normalize();
                             } else if (tempInLine.z < this.position.z) {
                                 steer.add(0, 0, distance);
-                                //this.velocity.normalize();
                             }
-
-
                         }
-
                     }
-                    //keep track of how many
-
                 }
             }
-
-
         } catch (Exception e) {
             System.out.println("something went wrong");
         }
@@ -286,26 +248,20 @@ public class Bird extends Aktor {
                             if (tempInLine.x != tempInLine.y || tempInLine.z != tempInLine.y || tempInLine.z != tempInLine.x) {
                                 if (tempInLine.x > this.position.x) {
                                     steer.add(distance, 0, 0);
-                                    //this.velocity.normalize();
                                 } else if (tempInLine.x < this.position.x) {
                                     steer.add(-distance, 0, 0);
-                                    //this.velocity.normalize();
                                 }
 
                                 if (tempInLine.y > this.position.y) {
                                     steer.add(0, distance, 0);
-                                    //this.velocity.normalize();
                                 } else if (tempInLine.y < this.position.y) {
                                     steer.add(0, -distance, 0);
-                                    //this.velocity.normalize();
                                 }
 
                                 if (tempInLine.z > this.position.z) {
                                     steer.add(0, 0, distance);
-                                    //this.velocity.normalize();
                                 } else if (tempInLine.z < this.position.z) {
                                     steer.add(0, 0, -distance);
-                                    //this.velocity.normalize();
                                 }
                             }
                         }
@@ -341,13 +297,10 @@ public class Bird extends Aktor {
                     if (getClass() == Bird.class) {
                         if (distance > sepDistance && distance < alignDistance) {
                             steer.add(other.getVelocity());
-
-
                         }
                     }
                 }
             }
-
         } catch (Exception e) {
             System.out.println("something went wrong");
         }
@@ -359,7 +312,6 @@ public class Bird extends Aktor {
             }
         }
         return steer;
-
     }
 
     public double getSepDistance() {

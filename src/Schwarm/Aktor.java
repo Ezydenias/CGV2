@@ -22,13 +22,12 @@ public abstract class Aktor {
     boolean leftrigjt;
     int iteration = 0;
 
-    public Aktor(Vektor3D velocity,Vektor3D position){
-        this.velocity=velocity;
-        this.position=position;
-        this.rotation=new Vektor3D();
-        this.number=0;
-
-        this.alive=true;
+    public Aktor(Vektor3D velocity, Vektor3D position) {
+        this.velocity = velocity;
+        this.position = position;
+        this.rotation = new Vektor3D();
+        this.number = 0;
+        this.alive = true;
     }
 
     public Vektor3D getRotation() {
@@ -38,7 +37,6 @@ public abstract class Aktor {
     public Vektor3D getVelocity() {
         return velocity;
     }
-
 
     public Vektor3D getPosition() {
         return position;
@@ -60,60 +58,35 @@ public abstract class Aktor {
             temptwo.setPosition(velocity);
             tempone.mult(1, 1, 0);
             rotation.x = LineareAlgebra.angleDegree(tempone, temptwo);
-//            tempone.setPosition(1, 0, 0);
-//            temptwo.setPosition(velocity);
-//            temptwo.mult(1, 0, 1);
-//            rotation.y = LineareAlgebra.angleDegree(tempone, temptwo);
-
             temptwo.setPosition(velocity);
 
             if (temptwo.z > 0) {
                 rotation.x = 360 - rotation.x;
             }
-//            if (temptwo.x > 0) {
-//                rotation.y = 360 - rotation.y;
-//            }
             if (temptwo.x > 0) {
                 rotation.z = 360 - rotation.z;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        try {
-          //  rotation.sub(180,180,180);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if(iteration>5){
-            iteration=0;
-        if(this.rotation.x<rotation.x){
-            rotation.y+=1;
-            leftrigjt=true;
-        } else if(this.rotation.x>rotation.x) {
-            rotation.y-=1;
-            leftrigjt=false;
-        }} else {
+        if (iteration > 5) {
+            iteration = 0;
+            if (this.rotation.x < rotation.x) {
+                rotation.y += 1;
+                leftrigjt = true;
+            } else if (this.rotation.x > rotation.x) {
+                rotation.y -= 1;
+                leftrigjt = false;
+            }
+        } else {
             iteration++;
-            if(leftrigjt==true){
-                rotation.y+=1;
-            }else{
-                rotation.y-=1;
+            if (leftrigjt == true) {
+                rotation.y += 1;
+            } else {
+                rotation.y -= 1;
             }
         }
-
-
-//        if(this.rotation.z<rotation.z){
-//            this.rotation.z+=1;
-//        } else {
-//            this.rotation.z-=1;
-//        }
-
-        this.rotation=rotation;
-
+        this.rotation = rotation;
     }
-
-
 }

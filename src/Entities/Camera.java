@@ -11,7 +11,6 @@ public class Camera {
 
     private Vektor3D position = new Vektor3D(0,0,200);
     private Vektor3D rotation = new Vektor3D(10,0,30);
-
     private Vektor3D positionOffset = new Vektor3D();
 
     public Vektor3D getRotationOffset() {
