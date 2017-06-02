@@ -1,6 +1,5 @@
 #version 400 core
 
-
 in vec2 pass_textureCoordinate;
 in vec3 surfaceNormal;
 in vec3 toLightVector;
@@ -35,10 +34,6 @@ void main(void){
 
     float toonFactor = dot(unitNormal,unitVectorToCamera);
     toonFactor = max(toonFactor,0.001);
-    //vec3 finalToon = vec3(0.0,0.0,0.0);
-    //if(toonFactor < (0.01*toon)){
-    //    finalToon = outLineColor;
-    //}
 
     vec4 texturein=texture(textureSampler,pass_textureCoordinate);
     if(toonFactor < (0.01*toon)){

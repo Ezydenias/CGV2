@@ -53,7 +53,6 @@ public class StaticShader extends ShaderProgram {
         super.loadVector(location_outLineColor, outLineColor);
     }
 
-
     @Override
     protected void bindAttributes() {
         super.bindAttribute(0, "position");
@@ -78,4 +77,5 @@ public class StaticShader extends ShaderProgram {
     public void loadProjectionMatrix(Matrix4f projection) {
         super.loadMatrix(location_projectionMatrix, projection);
     }
+
 }

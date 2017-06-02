@@ -1,9 +1,8 @@
 #version 400 core
+//Not Fully Implemented thus not in final releases yet
 
 
 out vec3 out_Steer;
-
-
 
 uniform vec3 otherPosition;
 uniform vec3 otherVelocity;

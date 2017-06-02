@@ -14,8 +14,8 @@ public class Vektor2D {
     }
 
     public Vektor2D(double x, double y) {
-        this.x=0;
-        this.y=0;
+        this.x = 0;
+        this.y = 0;
         this.setPosition(x, y);
     }
 
@@ -25,7 +25,7 @@ public class Vektor2D {
     }
 
     public void setPosition(double x, double y) {
-        if(x==Double.POSITIVE_INFINITY || y==Double.POSITIVE_INFINITY||x==Double.NEGATIVE_INFINITY || y==Double.NEGATIVE_INFINITY){
+        if (x == Double.POSITIVE_INFINITY || y == Double.POSITIVE_INFINITY || x == Double.NEGATIVE_INFINITY || y == Double.NEGATIVE_INFINITY) {
             System.out.println("Infinity not allowed, initialised with 0");
         } else {
             this.x = x;
@@ -44,7 +44,7 @@ public class Vektor2D {
         ex += x;
         ey += y;
 
-        if (((ex == Double.POSITIVE_INFINITY) || (ex == Double.NEGATIVE_INFINITY)) || ((ey == Double.POSITIVE_INFINITY) || (ey == Double.NEGATIVE_INFINITY))){
+        if (((ex == Double.POSITIVE_INFINITY) || (ex == Double.NEGATIVE_INFINITY)) || ((ey == Double.POSITIVE_INFINITY) || (ey == Double.NEGATIVE_INFINITY))) {
             throw new Exception("Emotionally Overflow");
         }
 
@@ -72,10 +72,10 @@ public class Vektor2D {
         double ex = this.x;
         double ey = this.y;
 
-        ex*=x;
-        ey*=y;
+        ex *= x;
+        ey *= y;
 
-        if (((ex == Double.POSITIVE_INFINITY) || (ex == Double.NEGATIVE_INFINITY)) || ((ey == Double.POSITIVE_INFINITY) || (ey == Double.NEGATIVE_INFINITY))){
+        if (((ex == Double.POSITIVE_INFINITY) || (ex == Double.NEGATIVE_INFINITY)) || ((ey == Double.POSITIVE_INFINITY) || (ey == Double.NEGATIVE_INFINITY))) {
             throw new Exception("Emotionally Overflow");
         }
         this.x = ex;
@@ -133,4 +133,5 @@ public class Vektor2D {
         double n = length();
         div(n, n);
     }
+
 }

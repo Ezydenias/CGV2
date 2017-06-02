@@ -4,6 +4,7 @@ import Vektor.Vektor3D;
 
 /**
  * Created by Ezydenias on 5/29/2017.
+ * Not Fully Implemented thus not in final releases yet
  */
 
 public class GPUBirdCalcShader extends ShaderProgram {

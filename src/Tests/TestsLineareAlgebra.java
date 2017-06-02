@@ -903,7 +903,8 @@ public class TestsLineareAlgebra {
         assertTrue(LineareAlgebra.isNotEqual(c, b));
         assertTrue(LineareAlgebra.isNotEqual(b, c));
     }
- @Test
+
+    @Test
     public void isNotEqualFunction3D() {
         Vektor3D a = new Vektor3D(2, 2, 2);
         Vektor3D b = new Vektor3D(2, 2, 2);
@@ -1428,7 +1429,6 @@ public class TestsLineareAlgebra {
     }
 
 
-
 //AngleRad Test
 
     @Test
@@ -1473,7 +1473,7 @@ public class TestsLineareAlgebra {
             testa = LineareAlgebra.angleRad(a, b);
             testb = LineareAlgebra.angleRad(b, a);
             testc = LineareAlgebra.angleRad(c, a);
- } catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("something went wrong");
         }
         assertEquals(testa, testb, 0.0);
@@ -1940,47 +1940,47 @@ public class TestsLineareAlgebra {
         Vektor3D atest = new Vektor3D(3, -3, 2);
         Vektor2D b = new Vektor2D(3, 0);
         Vektor2D btest = new Vektor2D(3, 0);
-        String c="";
-        String d="";
-        String e="";
-        c=LineareAlgebra.show(a);
-        d=LineareAlgebra.show(b);
+        String c = "";
+        String d = "";
+        String e = "";
+        c = LineareAlgebra.show(a);
+        d = LineareAlgebra.show(b);
 
-        assertNotSame(e,c);
-        assertNotSame(e,d);
+        assertNotSame(e, c);
+        assertNotSame(e, d);
 
         System.out.println(c);
         System.out.println(d);
 
-        assertEquals(atest.x,a.x,0.0);
-        assertEquals(atest.y,a.y,0.0);
-        assertEquals(atest.z,a.z,0.0);
-        assertEquals(btest.x,b.x,0.0);
-        assertEquals(btest.y,b.y,0.0);
+        assertEquals(atest.x, a.x, 0.0);
+        assertEquals(atest.y, a.y, 0.0);
+        assertEquals(atest.z, a.z, 0.0);
+        assertEquals(btest.x, b.x, 0.0);
+        assertEquals(btest.y, b.y, 0.0);
     }
 
     @Test
-    public void angleover180(){
-        Vektor3D temp = new Vektor3D(1,0,0);
-        Vektor3D temptwo= new Vektor3D(0,-1,0);
+    public void angleover180() {
+        Vektor3D temp = new Vektor3D(1, 0, 0);
+        Vektor3D temptwo = new Vektor3D(0, -1, 0);
 
         try {
-            System.out.println(""+LineareAlgebra.angleDegree(temp, temptwo));
-            System.out.println(""+LineareAlgebra.angleRad(temp, temptwo));
-            System.out.println(""+LineareAlgebra.cosEquation(temp, temptwo));
-            System.out.println(""+LineareAlgebra.sinEquation(temp, temptwo));
+            System.out.println("" + LineareAlgebra.angleDegree(temp, temptwo));
+            System.out.println("" + LineareAlgebra.angleRad(temp, temptwo));
+            System.out.println("" + LineareAlgebra.cosEquation(temp, temptwo));
+            System.out.println("" + LineareAlgebra.sinEquation(temp, temptwo));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-       temp.setPosition(1,0,0);
-        temptwo.setPosition(0,1,0);
+        temp.setPosition(1, 0, 0);
+        temptwo.setPosition(0, 1, 0);
 
         try {
-            System.out.println(""+LineareAlgebra.angleDegree(temp, temptwo));
-            System.out.println(""+LineareAlgebra.angleRad(temp, temptwo));
-            System.out.println(""+LineareAlgebra.cosEquation(temp, temptwo));
-            System.out.println(""+LineareAlgebra.sinEquation(temp, temptwo));
+            System.out.println("" + LineareAlgebra.angleDegree(temp, temptwo));
+            System.out.println("" + LineareAlgebra.angleRad(temp, temptwo));
+            System.out.println("" + LineareAlgebra.cosEquation(temp, temptwo));
+            System.out.println("" + LineareAlgebra.sinEquation(temp, temptwo));
         } catch (Exception e) {
             e.printStackTrace();
         }
