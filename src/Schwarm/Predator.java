@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Ezydenias on 5/9/2017.
+ * Need to implement killing birds and their behavior, not for the resea<rch paper trough
  */
 
 public class Predator extends Aktor {
@@ -14,7 +15,7 @@ public class Predator extends Aktor {
 
     public Predator(Vektor3D velocity, Vektor3D position) {
         super(velocity, position);
-        this.isAlive=true;
+        this.isAlive = true;
     }
 
     public void act(ArrayList<Aktor> stuff) {
@@ -22,14 +23,14 @@ public class Predator extends Aktor {
     }
 
     public void act() {
-        if(isAlive!=true){
+        if (isAlive != true) {
             return;
         }
     }
 
-    public void reAnimate(){
-        if(isAlive!=true){
-            isAlive=true;
+    public void reAnimate() {
+        if (isAlive != true) {
+            isAlive = true;
             //set new position here
         }
     }

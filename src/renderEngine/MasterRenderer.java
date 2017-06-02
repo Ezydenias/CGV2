@@ -20,14 +20,14 @@ public class MasterRenderer {
     private StaticShader shader = new StaticShader();
     private Renderer renderer = new Renderer(shader);
 
-    private Map<TexturedModel,List<Entity>> entities = new HashMap<TexturedModel,List<Entity>>();
+    private Map<TexturedModel, List<Entity>> entities = new HashMap<TexturedModel, List<Entity>>();
     private ArrayList<Light> lights = new ArrayList<Light>();
 
-    public void render(Light sun, Camera camera){
+    public void render(Light sun, Camera camera) {
         renderer.prepare();
         shader.start();
         shader.loadLight(sun);
-        if(lights!=null) {
+        if (lights != null) {
             for (Light light : lights) {
                 shader.loadLight(light);
             }
@@ -38,19 +38,19 @@ public class MasterRenderer {
         entities.clear();
     }
 
-    public void processEntity(Entity entity){
+    public void processEntity(Entity entity) {
         TexturedModel entityModel = entity.getModel();
         List<Entity> batch = entities.get(entityModel);
-        if(batch!=null){
+        if (batch != null) {
             batch.add(entity);
-        }else{
+        } else {
             List<Entity> newBatch = new ArrayList<Entity>();
             newBatch.add(entity);
-            entities.put(entityModel,newBatch);
+            entities.put(entityModel, newBatch);
         }
     }
 
-    public void cleanUp(){
+    public void cleanUp() {
         shader.cleanUp();
     }
 

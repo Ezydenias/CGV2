@@ -89,4 +89,5 @@ public abstract class Aktor {
         }
         this.rotation = rotation;
     }
+
 }

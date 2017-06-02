@@ -7,6 +7,8 @@ import shaders.GPUBirdCalcShader;
 
 /**
  * Created by Ezydenias on 5/29/2017.
+ * <p>
+ * UNNUSED CLASS
  */
 
 public class GPUBirdCalcRenderer {
@@ -19,22 +21,22 @@ public class GPUBirdCalcRenderer {
         shader.stop();
     }
 
-    public void render(){
+    public void render() {
 
     }
 
-    public void prepareBird(double cohDistance, double sepDistance, double aliDistance){
+    public void prepareBird(double cohDistance, double sepDistance, double aliDistance) {
         GL30.glBindVertexArray(1);
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
         GL20.glEnableVertexAttribArray(3);
 
-        shader.loadUniforms(cohDistance,sepDistance,aliDistance);
+        shader.loadUniforms(cohDistance, sepDistance, aliDistance);
     }
 
 
-    public void unbindTexturedModel(){
+    public void unbindTexturedModel() {
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);
         GL20.glDisableVertexAttribArray(2);
