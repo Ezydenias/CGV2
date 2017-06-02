@@ -116,6 +116,7 @@ public class Bird extends Aktor {
 
         try {
             // System.out.print("tempvelocity" + tempvelocity.x + " " + tempvelocity.y + " " + tempvelocity.z);
+            tempvelocity.normalize();
             tempvelocity.div(5);
             velocity.add(tempvelocity);
 
@@ -150,6 +151,7 @@ public class Bird extends Aktor {
             LineareAlgebra.show(this.getPosition());
 
             borders();
+            setRotation();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,37 +9,64 @@ import org.lwjgl.input.Keyboard;
 
 public class Camera {
 
-    private Vektor3D position = new Vektor3D(0,300,500);
-    private Vektor3D rotation = new Vektor3D(30,0,0);
+    private Vektor3D position = new Vektor3D(0,0,200);
+    private Vektor3D rotation = new Vektor3D(10,0,30);
+
+    private Vektor3D positionOffset = new Vektor3D();
+
+    public Vektor3D getRotationOffset() {
+        return rotationOffset;
+    }
+
+    public void setRotationOffset(Vektor3D rotationOffset) {
+        this.rotationOffset = rotationOffset;
+    }
+
+    private Vektor3D rotationOffset = new Vektor3D();
+
+    public Vektor3D getPositionOffset() {
+        return positionOffset;
+    }
+
+    public void setPositionOffset(Vektor3D positionOffset) {
+        this.positionOffset = positionOffset;
+    }
 
     public Camera() {
     }
 
     public void move(){
         if(Keyboard.isKeyDown(Keyboard.KEY_W)){
-            position.z-=0.1;
+            positionOffset.z-=2;
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_D)){
-            position.x+=0.1;
+            positionOffset.x+=2;
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_A)){
-            position.x-=0.1;
+            positionOffset.x-=2;
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_S)){
-            position.z+=0.1;
+            positionOffset.z+=2;
+        }
+
+        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+            positionOffset.y+=2;
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+            positionOffset.y-=2;
         }
 
         if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8)){
-            position.y+=0.03;
+            rotationOffset.x-=0.5;
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)){
-            rotation.y+=0.5;
+            rotationOffset.y+=0.5;
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4)){
-            rotation.y-=0.5;
+            rotationOffset.y-=0.5;
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
-            position.y-=0.03;
+            rotationOffset.x+=0.5;
         }
     }
 
@@ -63,4 +90,21 @@ public class Camera {
         return rotation.z;
     }
 
+    public void resetPositionOffset() {
+        try {
+            position.add(positionOffset);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        positionOffset.setPosition(0,0,0);
+    }
+
+    public void resetRotationOffset() {
+        try {
+            rotation.add(rotationOffset);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        rotationOffset.setPosition(0,0,0);
+    }
 }

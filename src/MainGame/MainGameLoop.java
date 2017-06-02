@@ -7,6 +7,7 @@ import Schwarm.Aktor;
 import Schwarm.Bird;
 import Schwarm.Flock;
 import Schwarm.Plane;
+import Vektor.LineareAlgebra;
 import Vektor.Vektor3D;
 import models.RawModel;
 import models.TexturedModel;
@@ -86,6 +87,16 @@ public class MainGameLoop {
         birdTex.setOutlinecolor(0, 0, 0);
         TexturedModel birdModel = new TexturedModel(bird,birdTex);
 
+
+        RawModel plane= OBJLoader.loadObjModel("plane",loader);
+        ModelTexture planeTex = new ModelTexture(loader.loadTexture("black"));
+        planeTex.setShineDamper(20);
+        planeTex.setReflectivity(30);
+        planeTex.setToon(70);
+        planeTex.setOutlinecolor(1, 1, 1);
+        TexturedModel planeModel = new TexturedModel(plane,planeTex);
+
+
         RawModel dragon = OBJLoader.loadObjModel("dragon", loader);
         ModelTexture dragonTex = new ModelTexture(loader.loadTexture("white"));
         dragonTex.setShineDamper(20);
@@ -94,7 +105,7 @@ public class MainGameLoop {
         dragonTex.setOutlinecolor(0, 0, 0);
         TexturedModel dragonModel = new TexturedModel(dragon, dragonTex);
 
-        Entity entity = new Entity(texturedModel, new Vektor3D(0, 0, -3), 0, 0, 0, 1);
+        Entity entity = new Entity(texturedModel, new Vektor3D(0, 0, -300), 0, 0, 0, 1000);
         Entity barnEntity = new Entity(barnModel, new Vektor3D(), 0, 0, 0, 1);
         Entity dragonEntity = new Entity(dragonModel, new Vektor3D(0, 0, -15), 0, 0, 0, 1);
 
@@ -116,7 +127,8 @@ public class MainGameLoop {
 
         for (Aktor plany : schwarm.Aktor) {
             if (plany.getClass() == Plane.class) {
-                allBirds.add(new Entity(dragonModel, plany.getPosition(), plany.rotation, 1));
+                allBirds.add(new Entity(planeModel, plany.getPosition(), plany.rotation, 3));
+                allPlanes.add(new Entity(barnModel, plany.getPosition(), plany.rotation, 1));
             }
         }
 
@@ -143,42 +155,41 @@ public class MainGameLoop {
 
         while (!Display.isCloseRequested()) {
 
-            entity.increasePosition(0, 0, 0);
-            entity.increaseRotation(0, -1, 0);
-            barnEntity.increaseRotation(0, 1, 0);
-            dragonEntity.increaseRotation(0, 1, 0);
+
             camera.move();
 
             //schwarm.run();
 
 
             int i = 0;
-
+            int j = 0;
             for (Aktor birdy : schwarm.Aktor) {
                 if (birdy.getClass() == Bird.class) {
                     try {
                         allBirds.get(i).setPosition(birdy.getPosition());
+                        allBirds.get(i).setRotation(birdy.getRotation());
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("doesn't exist");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+                if (birdy instanceof  Plane) {
+                    try {
+                        allBirds.get(i).setPosition(birdy.getPosition());
+                        birdy.setRotation();
+                        allBirds.get(i).setRotation(birdy.getRotation());
+                        allPlanes.get(j).setPosition((LineareAlgebra.add(birdy.getPosition(),LineareAlgebra.mult(birdy.getVelocity(),10))));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("doesn't exist");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    j++;
                 }
                 i++;
             }
 
-            for (Aktor birdy : schwarm.Aktor) {
-                if (birdy.getClass() == Plane.class) {
-                    try {
-                        allBirds.get(i).setPosition(birdy.getPosition());
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("doesn't exist");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                i++;
-            }
 
 
             for (Entity birds : allBirds) {
@@ -186,6 +197,15 @@ public class MainGameLoop {
 
                 renderer.processEntity(birds);
             }
+
+            for (Entity birds : allPlanes) {
+
+
+                renderer.processEntity(birds);
+            }
+
+
+
 
 //            for (Aktor birdy : schwarm.Aktor) {
 //                if (birdy.getClass() == Bird.class) {

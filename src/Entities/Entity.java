@@ -70,6 +70,12 @@ public class Entity {
         this.position = position;
     }
 
+    public void setRotation(Vektor3D rotation){
+        this.rotX=rotation.x;
+        this.rotY=rotation.y;
+        this.rotZ=rotation.z;
+    }
+
     public double getRotX() {
         return rotX;
     }
