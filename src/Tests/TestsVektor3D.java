@@ -766,5 +766,5 @@ public class TestsVektor3D {
         assertEquals(a.y, b.y, 0.0);
         assertEquals(a.z, b.z, 0.0);
     }
-    
+
 }
