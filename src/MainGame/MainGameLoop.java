@@ -28,7 +28,7 @@ import java.util.List;
 public class MainGameLoop {
 
     public static final int PLANES = 5;
-    public static final int BIRDS = 100;
+    public static final int BIRDS = 200;
 
     public static void main(String[] args) {
 
@@ -43,18 +43,18 @@ public class MainGameLoop {
         Camera camera = new Camera();
 
         RawModel bird = OBJLoader.loadObjModel("bird", loader);
-        ModelTexture birdTex = new ModelTexture(loader.loadTexture("white"));
-        birdTex.setShineDamper(20);
-        birdTex.setReflectivity(30);
-        birdTex.setToon(70);
+        ModelTexture birdTex = new ModelTexture(loader.loadTexture("birdTex"));
+        birdTex.setShineDamper(50);
+        birdTex.setReflectivity(10);
+        birdTex.setToon(7);
         birdTex.setOutlinecolor(0, 0, 0);
         TexturedModel birdModel = new TexturedModel(bird, birdTex);
 
         RawModel plane = OBJLoader.loadObjModel("plane", loader);
-        ModelTexture planeTex = new ModelTexture(loader.loadTexture("black"));
+        ModelTexture planeTex = new ModelTexture(loader.loadTexture("planeTex"));
         planeTex.setShineDamper(20);
         planeTex.setReflectivity(30);
-        planeTex.setToon(70);
+        planeTex.setToon(7);
         planeTex.setOutlinecolor(1, 1, 1);
         TexturedModel planeModel = new TexturedModel(plane, planeTex);
 

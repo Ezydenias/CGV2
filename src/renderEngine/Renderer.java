@@ -24,8 +24,8 @@ import java.util.Map;
 public class Renderer {
 
     private static final float FOV = 70;
-    private static final float NEAR_PLANE = 0.01f;
-    private static final float FAR_PLANE = 1200f;
+    private static final float NEAR_PLANE = 0.1f;
+    private static final float FAR_PLANE = 2000f;
 
     private Matrix4f projectionMatrix;
     private StaticShader shader;
