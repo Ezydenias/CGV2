@@ -23,25 +23,25 @@ public class TestsVektor2D {
         assertNotEquals(a.x, b.x, 0.0);
         assertNotEquals(a.y, b.y, 0.0);
 
-        assertEquals(0.0,c.x,0.0);
-        assertEquals(0.0,c.y,0.0);
+        assertEquals(0.0, c.x, 0.0);
+        assertEquals(0.0, c.y, 0.0);
     }
 
     @Test
-    public void testInfinityInitialized(){
-        Vektor2D a = new Vektor2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
-        Vektor2D b = new Vektor2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY);
-        Vektor2D c = new Vektor2D(3.0,Double.NEGATIVE_INFINITY);
-        Vektor2D d = new Vektor2D(Double.POSITIVE_INFINITY,Double.NEGATIVE_INFINITY);
+    public void testInfinityInitialized() {
+        Vektor2D a = new Vektor2D(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        Vektor2D b = new Vektor2D(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+        Vektor2D c = new Vektor2D(3.0, Double.NEGATIVE_INFINITY);
+        Vektor2D d = new Vektor2D(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
 
-        assertEquals(0.0,a.x,0.0);
-        assertEquals(0.0,a.y,0.0);
-        assertEquals(0.0,b.x,0.0);
-        assertEquals(0.0,b.y,0.0);
-        assertEquals(0.0,c.x,0.0);
-        assertEquals(0.0,c.y,0.0);
-        assertEquals(0.0,d.x,0.0);
-        assertEquals(0.0,d.y,0.0);
+        assertEquals(0.0, a.x, 0.0);
+        assertEquals(0.0, a.y, 0.0);
+        assertEquals(0.0, b.x, 0.0);
+        assertEquals(0.0, b.y, 0.0);
+        assertEquals(0.0, c.x, 0.0);
+        assertEquals(0.0, c.y, 0.0);
+        assertEquals(0.0, d.x, 0.0);
+        assertEquals(0.0, d.y, 0.0);
     }
 
 
@@ -458,6 +458,7 @@ public class TestsVektor2D {
         Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
         a.div(Double.MIN_VALUE, Double.MIN_VALUE);
     }
+
     @Test(expected = Exception.class)
     public void divOverflowMax() throws Exception {
         Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -469,6 +470,7 @@ public class TestsVektor2D {
         Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
         a.div(1, Double.MIN_VALUE);
     }
+
     @Test(expected = Exception.class)
     public void divOverflowMaxLeft() throws Exception {
         Vektor2D a = new Vektor2D(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -673,9 +675,38 @@ public class TestsVektor2D {
         assertEquals(a.x, k, 0.1);
         assertEquals(a.y, l, 0.1);
 
-        assertEquals(a.length(),1.0,0.1);
+        assertEquals(a.length(), 1.0, 0.1);
     }
 
+    @Test
+    public void normalizeResultLengthisOne() {
+        Vektor2D a = new Vektor2D(2, 3);
+        double b = 0;
+        try {
+            a.normalize();
+            b = a.length();
+        } catch (Exception e) {
+        }
+
+        assertEquals(1.0, b, 0.1);
+    }
+
+    @Test
+    public void normalizevVSequaldistribution() {
+        Vektor2D a = new Vektor2D(2, 3);
+        double b = 2 + 3;
+        double c = 1;
+        try {
+            a.div(b);
+            b = a.x + a.y;
+            c = a.length();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(1.0, b, 0.1);
+        assertNotEquals(1.0, c, 0.1);
+        System.out.println(c);
+    }
 
 
     //Length
@@ -698,6 +729,5 @@ public class TestsVektor2D {
         assertEquals(a.x, b.x, 0.0);
         assertEquals(a.y, b.y, 0.0);
     }
-
 
 }

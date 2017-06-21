@@ -3,6 +3,7 @@ package Vektor;
 /**
  * Created by Ezydenias on 4/12/2017.
  */
+
 public class LineareAlgebra {
 
     public static Vektor2D add(Vektor2D a, Vektor2D b) throws Exception {
@@ -235,62 +236,62 @@ public class LineareAlgebra {
     }
 
     public static double cosEquation(Vektor3D a, Vektor3D b) throws Exception {
-        if(a.isNullVector()||b.isNullVector()){
+        if (a.isNullVector() || b.isNullVector()) {
             throw new Exception("no Angle to Null Vektor Defined");
         }
         double atemp, btemp, abtemp;
-        abtemp=dotProduct(a,b);
-        atemp=length(a);
-        btemp=length(b);
-        return cosEquation(atemp,btemp,abtemp);
+        abtemp = dotProduct(a, b);
+        atemp = length(a);
+        btemp = length(b);
+        return cosEquation(atemp, btemp, abtemp);
     }
 
     public static double cosEquation(Vektor2D a, Vektor2D b) throws Exception {
-        if(a.isNullVector()||b.isNullVector()){
+        if (a.isNullVector() || b.isNullVector()) {
             throw new Exception("no Angle to Null Vektor Defined");
         }
         double atemp, btemp, abtemp;
-        abtemp=dotProduct(a,b);
-        atemp=length(a);
-        btemp=length(b);
-        return cosEquation(atemp,btemp,abtemp);
+        abtemp = dotProduct(a, b);
+        atemp = length(a);
+        btemp = length(b);
+        return cosEquation(atemp, btemp, abtemp);
     }
 
-    private static double cosEquation(double a, double b, double ab)    throws  Exception{
-        if (ab==0){
+    private static double cosEquation(double a, double b, double ab) throws Exception {
+        if (ab == 0) {
             return 0;
-        } else if (a==0||b==0){
+        } else if (a == 0 || b == 0) {
             throw new Exception("Division with Zero still Undefined and something divided with 0 is not interpretable in this context");
         } else {
-            return (ab/(a*b));
+            return (ab / (a * b));
         }
     }
 
     public static double sinEquation(Vektor3D a, Vektor3D b) throws Exception {
-        if(a.isNullVector()||b.isNullVector()){
+        if (a.isNullVector() || b.isNullVector()) {
             throw new Exception("no Angle to Null Vektor Defined");
         }
         double atemp, btemp, abtemp;
-        abtemp=length(crossProduct(a,b));
-        atemp=length(a);
-        btemp=length(b);
-        return cosEquation(atemp,btemp,abtemp);
+        abtemp = length(crossProduct(a, b));
+        atemp = length(a);
+        btemp = length(b);
+        return cosEquation(atemp, btemp, abtemp);
     }
 
     public static double angleRad(Vektor3D a, Vektor3D b) throws Exception {
-        return Math.acos(cosEquation(a,b));
+        return Math.acos(cosEquation(a, b));
     }
 
     public static double angleRad(Vektor2D a, Vektor2D b) throws Exception {
-        return Math.acos(cosEquation(a,b));
+        return Math.acos(cosEquation(a, b));
     }
 
     public static double angleDegree(Vektor3D a, Vektor3D b) throws Exception {
-        return Math.toDegrees(angleRad(a,b));
+        return Math.toDegrees(angleRad(a, b));
     }
 
     public static double angleDegree(Vektor2D a, Vektor2D b) throws Exception {
-        return radToDegree(angleRad(a,b));
+        return radToDegree(angleRad(a, b));
     }
 
     public static double radToDegree(double rad) {
@@ -302,44 +303,46 @@ public class LineareAlgebra {
     }
 
     public static double determinante(Vektor2D a, Vektor2D b) {
-        return (a.x*b.y-a.y*b.x);
+        return (a.x * b.y - a.y * b.x);
     }
 
     public static double determinante(Vektor3D a, Vektor3D b, Vektor3D c) {
-        return ((a.x*b.y*c.z+b.x*c.y*a.z+c.x*a.y*b.z)-(c.x*b.y*a.z+a.x*c.y*b.z+b.x*a.y*c.z));
+        return ((a.x * b.y * c.z + b.x * c.y * a.z + c.x * a.y * b.z) - (c.x * b.y * a.z + a.x * c.y * b.z + b.x * a.y * c.z));
     }
+
     public static double abs(double a) {
-        if (a<0){
+        if (a < 0) {
             return -a;
-        }else{
+        } else {
             return a;
         }
     }
 
     public static Vektor3D abs(Vektor3D a) {
         Vektor3D temp = new Vektor3D(a);
-        temp.x=abs(temp.x);
-        temp.y=abs(temp.y);
-        temp.z=abs(temp.z);
+        temp.x = abs(temp.x);
+        temp.y = abs(temp.y);
+        temp.z = abs(temp.z);
         return temp;
     }
 
     public static Vektor2D abs(Vektor2D a) {
         Vektor2D temp = new Vektor2D(a);
-        temp.x=abs(temp.x);
-        temp.y=abs(temp.y);
+        temp.x = abs(temp.x);
+        temp.y = abs(temp.y);
         return temp;
     }
 
     public static String show(Vektor3D a) {
-        String temp = "["+a.x+","+a.y+","+a.z+"}";
+        String temp = "[" + a.x + "," + a.y + "," + a.z + "}";
         System.out.println(temp);
         return temp;
     }
 
     public static String show(Vektor2D a) {
-        String temp = "["+a.x+","+a.y+"}";
+        String temp = "[" + a.x + "," + a.y + "}";
         System.out.println(temp);
         return temp;
     }
+
 }
